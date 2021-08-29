@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz/LoginPage.dart';
+import 'package:flutter_quiz/EntryPage.dart';
 
 class TopPage extends StatelessWidget {
   @override
@@ -9,24 +10,26 @@ class TopPage extends StatelessWidget {
         title: Text("TOP"),
       ),
       body: Center(
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          TextButton(
-              onPressed: () => {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return LoginPage();
-                    }))
-                  },
-              child: Text("参加", style: TextStyle(fontSize: 80))),
-          TextButton(
-              onPressed: () => {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return LoginPage();
-                    }))
-                  },
-              child: Text("問題作成・編集", style: TextStyle(fontSize: 80)))
-        ]),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              OutlinedButton(
+                  onPressed: () => {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return EntryPage();
+                        }))
+                      },
+                  child: Text("参加する", style: TextStyle(fontSize: 40))),
+              OutlinedButton(
+                  onPressed: () => {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return LoginPage();
+                        }))
+                      },
+                  child: Text("問題作成・編集", style: TextStyle(fontSize: 40)))
+            ]),
       ),
     );
   }
