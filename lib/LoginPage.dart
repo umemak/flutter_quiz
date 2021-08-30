@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz/MyPage.dart';
+import 'package:flutter_quiz/SignupPage.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -22,10 +23,6 @@ class MyAuthPage extends StatefulWidget {
 }
 
 class _MyAuthPageState extends State<MyAuthPage> {
-  // 入力されたメールアドレス
-  String newUserEmail = "";
-  // 入力されたパスワード
-  String newUserPassword = "";
   // 入力されたメールアドレス（ログイン）
   String loginUserEmail = "";
   // 入力されたパスワード（ログイン）
@@ -44,53 +41,6 @@ class _MyAuthPageState extends State<MyAuthPage> {
           padding: EdgeInsets.all(32),
           child: Column(
             children: <Widget>[
-              TextFormField(
-                // テキスト入力のラベルを設定
-                decoration: InputDecoration(labelText: "メールアドレス"),
-                onChanged: (String value) {
-                  setState(() {
-                    newUserEmail = value;
-                  });
-                },
-              ),
-              const SizedBox(height: 8),
-              TextFormField(
-                decoration: InputDecoration(labelText: "パスワード（６文字以上）"),
-                // パスワードが見えないようにする
-                obscureText: true,
-                onChanged: (String value) {
-                  setState(() {
-                    newUserPassword = value;
-                  });
-                },
-              ),
-              const SizedBox(height: 8),
-              ElevatedButton(
-                onPressed: () async {
-                  try {
-                    // メール/パスワードでユーザー登録
-                    final FirebaseAuth auth = FirebaseAuth.instance;
-                    final UserCredential result =
-                        await auth.createUserWithEmailAndPassword(
-                      email: newUserEmail,
-                      password: newUserPassword,
-                    );
-
-                    // 登録したユーザー情報
-                    final User user = result.user!;
-                    setState(() {
-                      infoText = "登録OK：${user.email}";
-                    });
-                  } catch (e) {
-                    // 登録に失敗した場合
-                    setState(() {
-                      infoText = "登録NG：${e.toString()}";
-                    });
-                  }
-                },
-                child: Text("ユーザー登録"),
-              ),
-              const SizedBox(height: 32),
               TextFormField(
                 decoration: InputDecoration(labelText: "メールアドレス"),
                 onChanged: (String value) {
@@ -138,7 +88,15 @@ class _MyAuthPageState extends State<MyAuthPage> {
                 child: Text("ログイン"),
               ),
               const SizedBox(height: 8),
-              Text(infoText)
+              Text(infoText),
+              OutlinedButton(
+                  onPressed: () => {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return SignupPage();
+                        }))
+                      },
+                  child: Text("利用登録"))
             ],
           ),
         ),
