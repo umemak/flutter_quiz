@@ -74,9 +74,9 @@ class _MyAuthPageState extends State<MyAuthPage> {
                     setState(() {
                       infoText = "ログインOK：${user.email}";
                     });
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return MyPage();
+                    await Navigator.of(context)
+                        .pushReplacement(MaterialPageRoute(builder: (context) {
+                      return MyPage(result.user!);
                     }));
                   } catch (e) {
                     // ログインに失敗した場合
