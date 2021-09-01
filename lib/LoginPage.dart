@@ -23,11 +23,8 @@ class MyAuthPage extends StatefulWidget {
 }
 
 class _MyAuthPageState extends State<MyAuthPage> {
-  // 入力されたメールアドレス（ログイン）
   String loginUserEmail = "";
-  // 入力されたパスワード（ログイン）
   String loginUserPassword = "";
-  // 登録・ログインに関する情報を表示
   String infoText = "";
 
   @override

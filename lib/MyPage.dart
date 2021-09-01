@@ -17,7 +17,21 @@ class MyPage extends StatelessWidget {
         children: [
           Container(
             padding: EdgeInsets.all(8),
-            child: Text("${user.email}"),
+            child: Column(
+              children: <Widget>[
+                Text("${user.email}"),
+                ElevatedButton(
+                  onPressed: () async {
+                    await Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) {
+                        return NewTestPage(this.user);
+                      }),
+                    );
+                  },
+                  child: Text("新規問題作成"),
+                ),
+              ],
+            ),
           ),
           Expanded(
             child: FutureBuilder<QuerySnapshot>(
@@ -38,7 +52,7 @@ class MyPage extends StatelessWidget {
                             onPressed: () async {
                               await Navigator.of(context).push(
                                 MaterialPageRoute(builder: (context) {
-                                  return EditTestPage(this.user);
+                                  return EditTestPage(this.user, document.id);
                                 }),
                               );
                             },

@@ -1,0 +1,26 @@
+Test[] - 問題
+  Title: String - 問題名 - AWS用語集
+  Question[] - 設問
+    Title: String - 問題文 - EC2の説明として正しいものは？
+    Item[] - 選択肢
+      Text: String
+        - 仮想サーバー
+        - オブジェクトストレージ
+        - マネージドデータベース
+        - 仮想ネットワーク
+    Answer: String - 回答 - 1
+    Explanation: String - 解説 - オブジェクトストレージはS3、マネージドデータベースはRDS、仮想ネットワークはVPC
+  Password: String - 限定公開用パスワード
+  Author: String - 作成者UID
+  Number: Int - 設問数
+
+Test[]
+  Entry[]
+    Name: String
+    UID: String
+    Point: Int
+    Answer[]
+      Item: String
+      Time: Time
+      Correct: Bool
+  Status: int - 1:参加受付中、2:n問目回答中、3:n問目結果表示中、4:最終結果表示中

@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz/TopPage.dart';
 
 class EditQuestionPage extends StatelessWidget {
+  EditQuestionPage(this.user);
+  final User user;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
