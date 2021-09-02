@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz/EditQuestionPage.dart';
+import 'package:flutter_quiz/MyPage.dart';
 
 class EditTestPage extends StatefulWidget {
   EditTestPage(this.user, this.id);
@@ -122,6 +123,10 @@ class _EditTestPageState extends State<EditTestPage> {
                     .collection('tests')
                     .doc(widget.id)
                     .delete();
+                await Navigator.of(context)
+                    .pushReplacement(MaterialPageRoute(builder: (context) {
+                  return MyPage(widget.user);
+                }));
               },
             ),
           )
