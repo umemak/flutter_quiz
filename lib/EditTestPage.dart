@@ -113,6 +113,17 @@ class _EditTestPageState extends State<EditTestPage> {
                 );
               },
             ),
+          ),
+          Container(
+            child: IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () async {
+                await FirebaseFirestore.instance
+                    .collection('tests')
+                    .doc(widget.id)
+                    .delete();
+              },
+            ),
           )
         ],
       ),
