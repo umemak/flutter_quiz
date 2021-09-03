@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/EditQuestionPage.dart';
+import 'package:flutter_quiz/MyPage.dart';
 
 class NewTestPage extends StatefulWidget {
   NewTestPage(this.user);
@@ -72,7 +72,7 @@ class _NewTestPageState extends State<NewTestPage> {
                     });
                     await Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) {
-                        return EditQuestionPage(widget.user);
+                        return MyPage(widget.user);
                       }),
                     );
                   },

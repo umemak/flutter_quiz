@@ -99,7 +99,7 @@ class _EditTestPageState extends State<EditTestPage> {
                             });
                             await Navigator.of(context).push(
                               MaterialPageRoute(builder: (context) {
-                                return EditQuestionPage(widget.user);
+                                return EditQuestionPage(widget.user, widget.id);
                               }),
                             );
                           },
