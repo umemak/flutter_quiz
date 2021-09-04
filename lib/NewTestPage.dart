@@ -13,8 +13,6 @@ class NewTestPage extends StatefulWidget {
 
 class _NewTestPageState extends State<NewTestPage> {
   String testTitle = "";
-  String testCount = "";
-  String testPassword = "";
 
   @override
   Widget build(BuildContext context) {
@@ -36,22 +34,6 @@ class _NewTestPageState extends State<NewTestPage> {
                   });
                 },
               ),
-              TextFormField(
-                decoration: InputDecoration(labelText: "設問数"),
-                onChanged: (String value) {
-                  setState(() {
-                    testCount = value;
-                  });
-                },
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: "参加用パスワード"),
-                onChanged: (String value) {
-                  setState(() {
-                    testPassword = value;
-                  });
-                },
-              ),
               const SizedBox(height: 8),
               Container(
                 width: double.infinity,
@@ -66,8 +48,6 @@ class _NewTestPageState extends State<NewTestPage> {
                         .set({
                       'author': widget.user.email,
                       'title': testTitle,
-                      'count': testCount,
-                      'password': testPassword,
                       'date': date
                     });
                     await Navigator.of(context).push(

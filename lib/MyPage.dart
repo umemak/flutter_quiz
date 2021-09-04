@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz/NewTestPage.dart';
 import 'package:flutter_quiz/EditTestPage.dart';
+import 'package:flutter_quiz/SharePage.dart';
 
 class MyPage extends StatelessWidget {
   MyPage(this.user);
