@@ -38,6 +38,7 @@ class MyPage extends StatelessWidget {
             child: FutureBuilder<QuerySnapshot>(
               future: FirebaseFirestore.instance
                   .collection('tests')
+                  .where('author', isEqualTo: this.user.email)
                   .orderBy('date')
                   .get(),
               builder: (context, snapshot) {

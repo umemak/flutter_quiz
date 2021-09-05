@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz/QuestionPage.dart';
@@ -10,18 +11,18 @@ class EntryPage extends StatefulWidget {
 class _EntryPageState extends State<EntryPage> {
   final _codeController = TextEditingController(text: "");
   final _nameController = TextEditingController(text: "");
-  final FirebaseAuth auth = FirebaseAuth.instance;
-  Future<User> signInAnon() async {
-    UserCredential result = await auth.signInAnonymously();
-    return result.user!;
-  }
+  // final FirebaseAuth auth = FirebaseAuth.instance;
+  // Future<User> signInAnon() async {
+  //   UserCredential result = await auth.signInAnonymously();
+  //   return result.user!;
+  // }
 
   // _EntryPageState() {
   //   signInAnon().then((User user) {
   //     this.user = user;
   //   });
   // }
-  Future<User> user = signInAnon();
+  // Future<User> user = signInAnon();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,6 @@ class _EntryPageState extends State<EntryPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(user.uid),
             TextFormField(
               decoration: InputDecoration(labelText: "参加コード"),
               controller: _codeController,
@@ -45,16 +45,44 @@ class _EntryPageState extends State<EntryPage> {
             ),
             const SizedBox(height: 8),
             ElevatedButton(
-              onPressed: () => {
-                // 参加コード確認
-                //   NG->再入力
-                //   OK->ドキュメントID取得
-                // 参加登録 games.docID.members.userID
-                // 開始ステータス待ち
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return QuestionPage();
-                }))
+              onPressed: () async {
+                try {
+                  // メール/パスワードでユーザー登録
+                  final FirebaseAuth auth = FirebaseAuth.instance;
+                  final UserCredential result = await auth.signInAnonymously();
+                  final User user = result.user!;
+                  // 参加コード確認
+                  final FirebaseFirestore store = FirebaseFirestore.instance;
+                  final QuerySnapshot ss = await store
+                      .collection('games')
+                      .where('code', isEqualTo: _codeController.text)
+                      .get();
+                  if (ss.docs.isEmpty) {
+                    //   NG->再入力
+                    print("game is not exists");
+                  }
+                  //   OK->ドキュメントID取得
+                  final gameId = ss.docs.first.reference.id;
+                  print("gameid: $gameId");
+                  // 参加登録 games.docID.members.userID
+                  await store
+                      .collection('games')
+                      .doc(gameId)
+                      .collection('members')
+                      .doc()
+                      .set({
+                    'uid': user.uid,
+                    'name': _nameController.text,
+                  });
+
+                  // 開始ステータス待ち
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return QuestionPage();
+                  }));
+                } catch (e) {
+                  // 登録に失敗した場合
+                }
               },
               child: Text("参加する"),
             ),
