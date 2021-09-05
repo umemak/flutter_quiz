@@ -9,12 +9,11 @@ Test[] - 問題
         - マネージドデータベース
         - 仮想ネットワーク
     Answer: String - 回答 - 1
-    Explanation: String - 解説 - オブジェクトストレージはS3、マネージドデータベースはRDS、仮想ネットワークはVPC
+    Note: String - 解説 - オブジェクトストレージはS3、マネージドデータベースはRDS、仮想ネットワークはVPC
   Password: String - 限定公開用パスワード
   Author: String - 作成者UID
-  Number: Int - 設問数
 
-Test[]
+Game[]
   Entry[]
     Name: String
     UID: String
