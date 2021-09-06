@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quiz/MyPage.dart';
 
 class SharePage extends StatefulWidget {
-  SharePage(this.user, this.id);
+  SharePage(this.user, this.id, this.docid);
   final User user;
   final String id;
+  final String docid;
 
   @override
   _SharePageState createState() => _SharePageState();

@@ -2,8 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz/NewTestPage.dart';
-import 'package:flutter_quiz/EditTestPage.dart';
-import 'package:flutter_quiz/SharePage.dart';
+import 'package:flutter_quiz/DetailTestPage.dart';
 
 class MyPage extends StatelessWidget {
   MyPage(this.user);
@@ -50,11 +49,11 @@ class MyPage extends StatelessWidget {
                         child: ListTile(
                           title: Text(document['title']),
                           trailing: IconButton(
-                            icon: Icon(Icons.edit),
+                            icon: Icon(Icons.arrow_right),
                             onPressed: () async {
                               await Navigator.of(context).push(
                                 MaterialPageRoute(builder: (context) {
-                                  return EditTestPage(this.user, document.id);
+                                  return DetailTestPage(this.user, document.id);
                                 }),
                               );
                             },
