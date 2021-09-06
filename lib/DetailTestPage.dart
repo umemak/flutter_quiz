@@ -581,6 +581,27 @@ class _DetailTestPageState extends State<DetailTestPage> {
               ),
             ),
             Container(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                icon: Icon(Icons.share),
+                label: Text("開催"),
+                onPressed: () async {
+                  final ref =
+                      await FirebaseFirestore.instance.collection('games').add({
+                    "code": Random().nextInt(100000).toString(),
+                    "status": 0,
+                    "test": widget.id,
+                  });
+                  await Navigator.of(context)
+                      .pushReplacement(MaterialPageRoute(builder: (context) {
+                    return SharePage(widget.user, widget.id, ref.id);
+                  }));
+                },
+              ),
+            ),
+            const SizedBox(height: 8),
+            Container(
+              width: double.infinity,
               child: ElevatedButton.icon(
                 icon: Icon(Icons.delete),
                 label: Text("削除"),
@@ -596,24 +617,6 @@ class _DetailTestPageState extends State<DetailTestPage> {
                 },
               ),
             ),
-            Container(
-              child: ElevatedButton.icon(
-                icon: Icon(Icons.share),
-                label: Text("開催"),
-                onPressed: () async {
-                  final ref =
-                      await FirebaseFirestore.instance.collection('games').add({
-                    "code": Random().nextInt(10).toString(),
-                    "status": 0,
-                    "test": widget.id,
-                  });
-                  await Navigator.of(context)
-                      .pushReplacement(MaterialPageRoute(builder: (context) {
-                    return SharePage(widget.user, widget.id, ref.id);
-                  }));
-                },
-              ),
-            )
           ],
         ),
       ),

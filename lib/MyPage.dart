@@ -4,9 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quiz/NewTestPage.dart';
 import 'package:flutter_quiz/DetailTestPage.dart';
 
-class MyPage extends StatelessWidget {
+class MyPage extends StatefulWidget {
   MyPage(this.user);
   final User user;
+
+  @override
+  _MyPageState createState() => _MyPageState();
+}
+
+class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,12 +25,12 @@ class MyPage extends StatelessWidget {
             padding: EdgeInsets.all(8),
             child: Column(
               children: <Widget>[
-                Text("${user.email}"),
+                Text("${widget.user.email}"),
                 ElevatedButton(
                   onPressed: () async {
                     await Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) {
-                        return NewTestPage(this.user);
+                        return NewTestPage(widget.user);
                       }),
                     );
                   },
@@ -37,7 +43,7 @@ class MyPage extends StatelessWidget {
             child: FutureBuilder<QuerySnapshot>(
               future: FirebaseFirestore.instance
                   .collection('tests')
-                  .where('author', isEqualTo: this.user.email)
+                  // .where('author', isEqualTo: widget.user.email)
                   .orderBy('date')
                   .get(),
               builder: (context, snapshot) {
@@ -53,7 +59,8 @@ class MyPage extends StatelessWidget {
                             onPressed: () async {
                               await Navigator.of(context).push(
                                 MaterialPageRoute(builder: (context) {
-                                  return DetailTestPage(this.user, document.id);
+                                  return DetailTestPage(
+                                      widget.user, document.id);
                                 }),
                               );
                             },
