@@ -69,12 +69,11 @@ class _EntryPageState extends State<EntryPage> {
                       .collection('games')
                       .doc(gameId)
                       .collection('members')
-                      .doc()
+                      .doc(user.uid)
                       .set({
                     'uid': user.uid,
                     'name': _nameController.text,
                   });
-
                   // 開始ステータス待ち
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
