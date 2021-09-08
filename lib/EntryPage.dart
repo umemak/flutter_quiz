@@ -3,29 +3,27 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz/QuestionPage.dart';
 
+class EntryArguments {
+  final String code;
+
+  EntryArguments(this.code);
+}
+
 class EntryPage extends StatefulWidget {
+  static const routeName = '/entry';
+  EntryPage(this.arguments);
+  final Object? arguments;
+
   @override
   _EntryPageState createState() => _EntryPageState();
 }
 
 class _EntryPageState extends State<EntryPage> {
-  final _codeController = TextEditingController(text: "");
-  final _nameController = TextEditingController(text: "");
-  // final FirebaseAuth auth = FirebaseAuth.instance;
-  // Future<User> signInAnon() async {
-  //   UserCredential result = await auth.signInAnonymously();
-  //   return result.user!;
-  // }
-
-  // _EntryPageState() {
-  //   signInAnon().then((User user) {
-  //     this.user = user;
-  //   });
-  // }
-  // Future<User> user = signInAnon();
-
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as EntryArguments;
+    final _codeController = TextEditingController(text: args.code);
+    final _nameController = TextEditingController(text: "");
     return Scaffold(
       appBar: AppBar(
         title: Text("参加"),

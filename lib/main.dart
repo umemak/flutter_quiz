@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz/TopPage.dart';
+import 'package:flutter_quiz/EntryPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,11 +10,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Quiz',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter Quiz Home Page'),
+      initialRoute: '/',
+      // routes: {'/entry': (context) => EntryPage()},
+      onGenerateRoute: (settings) {
+        if (settings.name == EntryPage.routeName) {
+          return MaterialPageRoute(
+            builder: (context) =>
+                EntryPage(settings.arguments as EntryArguments),
+          );
+        }
+        return null;
+      },
     );
   }
 }

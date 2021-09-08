@@ -2,11 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz/PresenterPage.dart';
+import 'package:flutter_quiz/EntryPage.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html';
 
 class SharePage extends StatefulWidget {
-  SharePage(this.user, this.id, this.gameid);
+  SharePage(this.user, this.id, this.title, this.code, this.gameid);
   final User user;
   final String id;
+  final String title;
+  final String code;
   final String gameid;
 
   @override
@@ -14,10 +20,10 @@ class SharePage extends StatefulWidget {
 }
 
 class _SharePageState extends State<SharePage> {
-  String testTitle = "";
-
   @override
   Widget build(BuildContext context) {
+    final testUrl =
+        "https://${window.location.hostname}/#/entry?code=" + widget.gameid;
     return Scaffold(
       appBar: AppBar(
         title: Text("問題共有"),
@@ -27,20 +33,31 @@ class _SharePageState extends State<SharePage> {
           padding: EdgeInsets.all(32),
           child: Column(
             children: <Widget>[
-              Text("${widget.user.email}"),
-              TextFormField(
-                decoration: InputDecoration(labelText: "タイトル"),
-                onChanged: (String value) {
-                  setState(() {
-                    testTitle = value;
-                  });
-                },
+              Text("${widget.title}"),
+              const SizedBox(height: 8),
+              QrImage(
+                data: testUrl,
+                version: QrVersions.auto,
+                size: 200.0,
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Text("$testUrl"),
+                  IconButton(
+                    onPressed: () async {
+                      await Navigator.of(context)
+                          .pushNamed('/entry', arguments: widget.gameid);
+                    },
+                    icon: Icon(Icons.open_in_new),
+                  )
+                ],
               ),
               const SizedBox(height: 8),
               Container(
                 width: double.infinity,
                 child: ElevatedButton(
-                  child: Text('作成'),
+                  child: Text('開始'),
                   onPressed: () async {
                     await Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) {

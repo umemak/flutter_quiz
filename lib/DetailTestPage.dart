@@ -168,36 +168,53 @@ class _DetailTestPageState extends State<DetailTestPage> {
                                   controller: _qTitleController[2],
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢1"),
                                   controller: _qItem1Controller[2],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢2"),
                                   controller: _qItem2Controller[2],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢3"),
                                   controller: _qItem3Controller[2],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢4"),
                                   controller: _qItem4Controller[2],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration: InputDecoration(labelText: "正解"),
                                   controller: _qAnswerController[2],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration: InputDecoration(labelText: "解説"),
                                   controller: _qNoteController[2],
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
+                                  readOnly: true,
                                 ),
                               ],
                             ),
@@ -220,36 +237,53 @@ class _DetailTestPageState extends State<DetailTestPage> {
                                   controller: _qTitleController[3],
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢1"),
                                   controller: _qItem1Controller[3],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢2"),
                                   controller: _qItem2Controller[3],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢3"),
                                   controller: _qItem3Controller[3],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢4"),
                                   controller: _qItem4Controller[3],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration: InputDecoration(labelText: "正解"),
                                   controller: _qAnswerController[3],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration: InputDecoration(labelText: "解説"),
                                   controller: _qNoteController[3],
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
+                                  readOnly: true,
                                 ),
                               ],
                             ),
@@ -272,36 +306,53 @@ class _DetailTestPageState extends State<DetailTestPage> {
                                   controller: _qTitleController[4],
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢1"),
                                   controller: _qItem1Controller[4],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢2"),
                                   controller: _qItem2Controller[4],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢3"),
                                   controller: _qItem3Controller[4],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢4"),
                                   controller: _qItem4Controller[4],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration: InputDecoration(labelText: "正解"),
                                   controller: _qAnswerController[4],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration: InputDecoration(labelText: "解説"),
                                   controller: _qNoteController[4],
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
+                                  readOnly: true,
                                 ),
                               ],
                             ),
@@ -324,36 +375,53 @@ class _DetailTestPageState extends State<DetailTestPage> {
                                   controller: _qTitleController[5],
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢1"),
                                   controller: _qItem1Controller[5],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢2"),
                                   controller: _qItem2Controller[5],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢3"),
                                   controller: _qItem3Controller[5],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢4"),
                                   controller: _qItem4Controller[5],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration: InputDecoration(labelText: "正解"),
                                   controller: _qAnswerController[5],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration: InputDecoration(labelText: "解説"),
                                   controller: _qNoteController[5],
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
+                                  readOnly: true,
                                 ),
                               ],
                             ),
@@ -376,36 +444,53 @@ class _DetailTestPageState extends State<DetailTestPage> {
                                   controller: _qTitleController[6],
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢1"),
                                   controller: _qItem1Controller[6],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢2"),
                                   controller: _qItem2Controller[6],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢3"),
                                   controller: _qItem3Controller[6],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢4"),
                                   controller: _qItem4Controller[6],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration: InputDecoration(labelText: "正解"),
                                   controller: _qAnswerController[6],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration: InputDecoration(labelText: "解説"),
                                   controller: _qNoteController[6],
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
+                                  readOnly: true,
                                 ),
                               ],
                             ),
@@ -428,36 +513,53 @@ class _DetailTestPageState extends State<DetailTestPage> {
                                   controller: _qTitleController[7],
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢1"),
                                   controller: _qItem1Controller[7],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢2"),
                                   controller: _qItem2Controller[7],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢3"),
                                   controller: _qItem3Controller[7],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢4"),
                                   controller: _qItem4Controller[7],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration: InputDecoration(labelText: "正解"),
                                   controller: _qAnswerController[7],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration: InputDecoration(labelText: "解説"),
                                   controller: _qNoteController[7],
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
+                                  readOnly: true,
                                 ),
                               ],
                             ),
@@ -480,36 +582,53 @@ class _DetailTestPageState extends State<DetailTestPage> {
                                   controller: _qTitleController[8],
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢1"),
                                   controller: _qItem1Controller[8],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢2"),
                                   controller: _qItem2Controller[8],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢3"),
                                   controller: _qItem3Controller[8],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢4"),
                                   controller: _qItem4Controller[8],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration: InputDecoration(labelText: "正解"),
                                   controller: _qAnswerController[8],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration: InputDecoration(labelText: "解説"),
                                   controller: _qNoteController[8],
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
+                                  readOnly: true,
                                 ),
                               ],
                             ),
@@ -532,36 +651,53 @@ class _DetailTestPageState extends State<DetailTestPage> {
                                   controller: _qTitleController[9],
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢1"),
                                   controller: _qItem1Controller[9],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢2"),
                                   controller: _qItem2Controller[9],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢3"),
                                   controller: _qItem3Controller[9],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢4"),
                                   controller: _qItem4Controller[9],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration: InputDecoration(labelText: "正解"),
                                   controller: _qAnswerController[9],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration: InputDecoration(labelText: "解説"),
                                   controller: _qNoteController[9],
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
+                                  readOnly: true,
                                 ),
                               ],
                             ),
@@ -584,36 +720,53 @@ class _DetailTestPageState extends State<DetailTestPage> {
                                   controller: _qTitleController[10],
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢1"),
                                   controller: _qItem1Controller[10],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢2"),
                                   controller: _qItem2Controller[10],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢3"),
                                   controller: _qItem3Controller[10],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration:
                                       InputDecoration(labelText: "選択肢4"),
                                   controller: _qItem4Controller[10],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration: InputDecoration(labelText: "正解"),
                                   controller: _qAnswerController[10],
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  readOnly: true,
                                 ),
                                 TextFormField(
                                   decoration: InputDecoration(labelText: "解説"),
                                   controller: _qNoteController[10],
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
+                                  readOnly: true,
                                 ),
                               ],
                             ),
@@ -638,17 +791,18 @@ class _DetailTestPageState extends State<DetailTestPage> {
                             icon: Icon(Icons.share),
                             label: Text("開催"),
                             onPressed: () async {
+                              final code = Random().nextInt(100000).toString();
                               final ref = await FirebaseFirestore.instance
                                   .collection('games')
                                   .add({
-                                "code": Random().nextInt(100000).toString(),
+                                "code": code,
                                 "status": 0,
                                 "test": widget.id,
                               });
                               await Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(builder: (context) {
-                                return SharePage(
-                                    widget.user, widget.id, ref.id);
+                                return SharePage(widget.user, widget.id,
+                                    _titleController.text, code, ref.id);
                               }));
                             },
                           ),

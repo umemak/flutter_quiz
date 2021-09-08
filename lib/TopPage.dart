@@ -14,12 +14,10 @@ class TopPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               OutlinedButton(
-                  onPressed: () => {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return EntryPage();
-                        }))
-                      },
+                  onPressed: () => Navigator.of(context).pushNamed(
+                        EntryPage.routeName,
+                        arguments: EntryArguments('234'),
+                      ),
                   child: Text("参加する", style: TextStyle(fontSize: 40))),
               OutlinedButton(
                   onPressed: () => {
