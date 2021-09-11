@@ -18,10 +18,14 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       // routes: {'/entry': (context) => EntryPage()},
       onGenerateRoute: (settings) {
-        if (settings.name == EntryPage.routeName) {
+        print(settings.name);
+        final settingsUri = Uri.parse(settings.name!);
+        print(settingsUri.path);
+        final codeID = settingsUri.queryParameters['code'];
+        print(codeID);
+        if (settingsUri.path == EntryPage.routeName) {
           return MaterialPageRoute(
-            builder: (context) =>
-                EntryPage(settings.arguments as EntryArguments),
+            builder: (context) => EntryPage(codeID!),
           );
         }
         return null;

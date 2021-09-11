@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quiz/PresenterPage.dart';
 import 'package:flutter_quiz/EntryPage.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:flutter/services.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html';
 
@@ -33,7 +34,7 @@ class _SharePageState extends State<SharePage> {
           padding: EdgeInsets.all(32),
           child: Column(
             children: <Widget>[
-              Text("${widget.title}"),
+              Text(widget.title),
               const SizedBox(height: 8),
               QrImage(
                 data: testUrl,
@@ -43,13 +44,13 @@ class _SharePageState extends State<SharePage> {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Text("$testUrl"),
+                  Text(testUrl),
                   IconButton(
                     onPressed: () async {
-                      await Navigator.of(context)
-                          .pushNamed('/entry', arguments: widget.gameid);
+                      final data = ClipboardData(text: testUrl);
+                      await Clipboard.setData(data);
                     },
-                    icon: Icon(Icons.open_in_new),
+                    icon: Icon(Icons.content_copy),
                   )
                 ],
               ),

@@ -3,16 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz/QuestionPage.dart';
 
-class EntryArguments {
-  final String code;
-
-  EntryArguments(this.code);
-}
-
 class EntryPage extends StatefulWidget {
   static const routeName = '/entry';
-  EntryPage(this.arguments);
-  final Object? arguments;
+  EntryPage(this.codeID);
+  final String codeID;
 
   @override
   _EntryPageState createState() => _EntryPageState();
@@ -21,8 +15,7 @@ class EntryPage extends StatefulWidget {
 class _EntryPageState extends State<EntryPage> {
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as EntryArguments;
-    final _codeController = TextEditingController(text: args.code);
+    final _codeController = TextEditingController(text: widget.codeID);
     final _nameController = TextEditingController(text: "");
     return Scaffold(
       appBar: AppBar(
