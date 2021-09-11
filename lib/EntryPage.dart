@@ -65,10 +65,26 @@ class _EntryPageState extends State<EntryPage> {
                       'name': _nameController.text,
                     });
                     // 開始ステータス待ち
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return QuestionPage();
-                    }));
+                    setState(() {
+                      infoText = "開始までお待ちください";
+                    });
+                    store
+                        .collection('games')
+                        .doc(ss.id)
+                        .snapshots()
+                        .listen((event) {
+                      print(event.data);
+                      Map<String, dynamic> data = event.data()!;
+                      if (data['status'] == "1") {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return QuestionPage();
+                        }));
+                      }
+                      setState(() {
+                        infoText = "status：${data['status']}";
+                      });
+                    });
                   }
                 } catch (e) {
                   setState(() {
