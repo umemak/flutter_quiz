@@ -13,6 +13,7 @@ class EntryPage extends StatefulWidget {
 }
 
 class _EntryPageState extends State<EntryPage> {
+  String infoText = "";
   @override
   Widget build(BuildContext context) {
     final _codeController = TextEditingController(text: widget.codeID);
@@ -38,44 +39,47 @@ class _EntryPageState extends State<EntryPage> {
             ElevatedButton(
               onPressed: () async {
                 try {
-                  // メール/パスワードでユーザー登録
+                  // 匿名ログイン
                   final FirebaseAuth auth = FirebaseAuth.instance;
                   final UserCredential result = await auth.signInAnonymously();
                   final User user = result.user!;
                   // 参加コード確認
                   final FirebaseFirestore store = FirebaseFirestore.instance;
-                  final QuerySnapshot ss = await store
+                  final DocumentSnapshot ss = await store
                       .collection('games')
-                      .where('code', isEqualTo: _codeController.text)
+                      .doc(_codeController.text)
                       .get();
-                  if (ss.docs.isEmpty) {
-                    //   NG->再入力
-                    print("game is not exists");
+                  if (!ss.exists) {
+                    setState(() {
+                      infoText = "参加コードが無効です";
+                    });
+                  } else {
+                    // 参加登録 games.docID.members.userID
+                    await store
+                        .collection('games')
+                        .doc(ss.id)
+                        .collection('members')
+                        .doc(user.uid)
+                        .set({
+                      'uid': user.uid,
+                      'name': _nameController.text,
+                    });
+                    // 開始ステータス待ち
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return QuestionPage();
+                    }));
                   }
-                  //   OK->ドキュメントID取得
-                  final gameId = ss.docs.first.reference.id;
-                  print("gameid: $gameId");
-                  // 参加登録 games.docID.members.userID
-                  await store
-                      .collection('games')
-                      .doc(gameId)
-                      .collection('members')
-                      .doc(user.uid)
-                      .set({
-                    'uid': user.uid,
-                    'name': _nameController.text,
-                  });
-                  // 開始ステータス待ち
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
-                    return QuestionPage();
-                  }));
                 } catch (e) {
-                  // 登録に失敗した場合
+                  setState(() {
+                    infoText = "参加コードが無効です";
+                  });
                 }
               },
               child: Text("参加する"),
             ),
+            const SizedBox(height: 8),
+            Text(infoText),
           ],
         ),
       ),

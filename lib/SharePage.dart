@@ -24,7 +24,8 @@ class _SharePageState extends State<SharePage> {
   @override
   Widget build(BuildContext context) {
     final testUrl =
-        "https://${window.location.hostname}/#/entry?code=" + widget.gameid;
+        "${window.location.protocol}://${window.location.hostname}:${window.location.port}/#/entry?code=" +
+            widget.gameid;
     return Scaffold(
       appBar: AppBar(
         title: Text("問題共有"),

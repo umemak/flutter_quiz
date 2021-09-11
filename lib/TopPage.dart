@@ -16,7 +16,7 @@ class TopPage extends StatelessWidget {
               OutlinedButton(
                   onPressed: () => Navigator.of(context).pushNamed(
                         EntryPage.routeName,
-                        arguments: {'code': '123'},
+                        arguments: {'code': ''},
                       ),
                   child: Text("参加する", style: TextStyle(fontSize: 40))),
               OutlinedButton(
