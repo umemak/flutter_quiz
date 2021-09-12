@@ -21,6 +21,12 @@ class SharePage extends StatefulWidget {
 }
 
 class _SharePageState extends State<SharePage> {
+  final Stream<QuerySnapshot> _memberStream = FirebaseFirestore.instance
+      .collection('games')
+      // .doc(gameid)
+      // .collection('members')
+      // .orderBy('date')
+      .snapshots();
   @override
   Widget build(BuildContext context) {
     final testUrl =
@@ -34,7 +40,7 @@ class _SharePageState extends State<SharePage> {
         child: Container(
           padding: EdgeInsets.all(32),
           child: Column(
-            children: <Widget>[
+            children: [
               Text(widget.title),
               const SizedBox(height: 8),
               QrImage(
@@ -68,7 +74,45 @@ class _SharePageState extends State<SharePage> {
                     );
                   },
                 ),
-              )
+              ),
+              Expanded(
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: _memberStream,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      final List<DocumentSnapshot> games = snapshot.data!.docs;
+                      games.map((game) {
+                        if (game.id == widget.gameid) {
+                          final documents = game['menbers'];
+                          return ListView(
+                            children: documents.map((document) {
+                              return Card(
+                                child: CheckboxListTile(
+                                  title: Text(document['name']),
+                                  onChanged: (bool? value) async {
+                                    await FirebaseFirestore.instance
+                                        .collection('games')
+                                        .doc(widget.gameid)
+                                        .collection('members')
+                                        .doc(document.id)
+                                        .set({
+                                      'joined': value,
+                                    });
+                                  },
+                                  value: document['joined'],
+                                ),
+                              );
+                            }).toList(),
+                          );
+                        }
+                      });
+                    }
+                    return Center(
+                      child: Text("読込中..."),
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),

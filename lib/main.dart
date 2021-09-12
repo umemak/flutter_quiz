@@ -16,14 +16,10 @@ class MyApp extends StatelessWidget {
       ),
       home: MyHomePage(title: 'Flutter Quiz Home Page'),
       initialRoute: '/',
-      // routes: {'/entry': (context) => EntryPage()},
       onGenerateRoute: (settings) {
-        print(settings.name);
         final settingsUri = Uri.parse(settings.name!);
-        print(settingsUri.path);
-        final codeID = settingsUri.queryParameters['code'];
-        print(codeID);
         if (settingsUri.path == EntryPage.routeName) {
+          final codeID = settingsUri.queryParameters['code'];
           return MaterialPageRoute(
             builder: (context) => EntryPage(codeID!),
           );
