@@ -46,8 +46,6 @@ class _EditTestPageState extends State<EditTestPage> {
                         snapshot.data!.data() as Map<String, dynamic>;
                     final _titleController = TextEditingController.fromValue(
                         TextEditingValue(text: data['title'] ?? ""));
-                    final _passwordController = TextEditingController.fromValue(
-                        TextEditingValue(text: data['password'] ?? ""));
                     var _qTitleController = []..length = 11;
                     var _qItem1Controller = []..length = 11;
                     var _qItem2Controller = []..length = 11;
@@ -72,6 +70,42 @@ class _EditTestPageState extends State<EditTestPage> {
                       _qNoteController[i] = TextEditingController.fromValue(
                           TextEditingValue(text: data[ii + 'Note'] ?? ""));
                     }
+                    TextFormField makeTextFormField(
+                        String l, TextEditingController c) {
+                      return TextFormField(
+                        decoration: InputDecoration(labelText: l),
+                        controller: c,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        readOnly: false,
+                      );
+                    }
+
+                    Card makeCard(int idx) {
+                      return Card(
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(8),
+                              color: Theme.of(context).primaryColor,
+                              width: double.infinity,
+                              child: Text("${idx.toString()}問目",
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .bodyText1),
+                            ),
+                            makeTextFormField("問題文", _qTitleController[idx]),
+                            makeTextFormField("選択肢1", _qItem1Controller[idx]),
+                            makeTextFormField("選択肢2", _qItem2Controller[idx]),
+                            makeTextFormField("選択肢3", _qItem3Controller[idx]),
+                            makeTextFormField("選択肢4", _qItem4Controller[idx]),
+                            makeTextFormField("正解", _qAnswerController[idx]),
+                            makeTextFormField("解説", _qNoteController[idx]),
+                          ],
+                        ),
+                      );
+                    }
+
                     return Column(
                       children: <Widget>[
                         Text("${widget.user.email}"),
@@ -79,485 +113,22 @@ class _EditTestPageState extends State<EditTestPage> {
                           decoration: InputDecoration(labelText: "タイトル"),
                           controller: _titleController,
                         ),
-                        TextFormField(
-                          decoration: InputDecoration(labelText: "参加用パスワード"),
-                          controller: _passwordController,
-                        ),
                         const SizedBox(height: 8),
-                        Card(
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(8),
-                                color: Theme.of(context).primaryColor,
-                                width: double.infinity,
-                                child: Text("1問目",
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .bodyText1),
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "問題文"),
-                                controller: _qTitleController[1],
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢1"),
-                                controller: _qItem1Controller[1],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢2"),
-                                controller: _qItem2Controller[1],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢3"),
-                                controller: _qItem3Controller[1],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢4"),
-                                controller: _qItem4Controller[1],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "正解"),
-                                controller: _qAnswerController[1],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "解説"),
-                                controller: _qNoteController[1],
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Card(
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(8),
-                                color: Theme.of(context).primaryColor,
-                                width: double.infinity,
-                                child: Text("2問目",
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .bodyText1),
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "問題文"),
-                                controller: _qTitleController[2],
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢1"),
-                                controller: _qItem1Controller[2],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢2"),
-                                controller: _qItem2Controller[2],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢3"),
-                                controller: _qItem3Controller[2],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢4"),
-                                controller: _qItem4Controller[2],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "正解"),
-                                controller: _qAnswerController[2],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "解説"),
-                                controller: _qNoteController[2],
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Card(
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(8),
-                                color: Theme.of(context).primaryColor,
-                                width: double.infinity,
-                                child: Text("3問目",
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .bodyText1),
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "問題文"),
-                                controller: _qTitleController[3],
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢1"),
-                                controller: _qItem1Controller[3],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢2"),
-                                controller: _qItem2Controller[3],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢3"),
-                                controller: _qItem3Controller[3],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢4"),
-                                controller: _qItem4Controller[3],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "正解"),
-                                controller: _qAnswerController[3],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "解説"),
-                                controller: _qNoteController[3],
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Card(
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(8),
-                                color: Theme.of(context).primaryColor,
-                                width: double.infinity,
-                                child: Text("4問目",
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .bodyText1),
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "問題文"),
-                                controller: _qTitleController[4],
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢1"),
-                                controller: _qItem1Controller[4],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢2"),
-                                controller: _qItem2Controller[4],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢3"),
-                                controller: _qItem3Controller[4],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢4"),
-                                controller: _qItem4Controller[4],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "正解"),
-                                controller: _qAnswerController[4],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "解説"),
-                                controller: _qNoteController[4],
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Card(
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(8),
-                                color: Theme.of(context).primaryColor,
-                                width: double.infinity,
-                                child: Text("5問目",
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .bodyText1),
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "問題文"),
-                                controller: _qTitleController[5],
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢1"),
-                                controller: _qItem1Controller[5],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢2"),
-                                controller: _qItem2Controller[5],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢3"),
-                                controller: _qItem3Controller[5],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢4"),
-                                controller: _qItem4Controller[5],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "正解"),
-                                controller: _qAnswerController[5],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "解説"),
-                                controller: _qNoteController[5],
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Card(
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(8),
-                                color: Theme.of(context).primaryColor,
-                                width: double.infinity,
-                                child: Text("6問目",
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .bodyText1),
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "問題文"),
-                                controller: _qTitleController[6],
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢1"),
-                                controller: _qItem1Controller[6],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢2"),
-                                controller: _qItem2Controller[6],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢3"),
-                                controller: _qItem3Controller[6],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢4"),
-                                controller: _qItem4Controller[6],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "正解"),
-                                controller: _qAnswerController[6],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "解説"),
-                                controller: _qNoteController[6],
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Card(
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(8),
-                                color: Theme.of(context).primaryColor,
-                                width: double.infinity,
-                                child: Text("7問目",
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .bodyText1),
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "問題文"),
-                                controller: _qTitleController[7],
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢1"),
-                                controller: _qItem1Controller[7],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢2"),
-                                controller: _qItem2Controller[7],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢3"),
-                                controller: _qItem3Controller[7],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢4"),
-                                controller: _qItem4Controller[7],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "正解"),
-                                controller: _qAnswerController[7],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "解説"),
-                                controller: _qNoteController[7],
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Card(
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(8),
-                                color: Theme.of(context).primaryColor,
-                                width: double.infinity,
-                                child: Text("8問目",
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .bodyText1),
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "問題文"),
-                                controller: _qTitleController[8],
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢1"),
-                                controller: _qItem1Controller[8],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢2"),
-                                controller: _qItem2Controller[8],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢3"),
-                                controller: _qItem3Controller[8],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢4"),
-                                controller: _qItem4Controller[8],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "正解"),
-                                controller: _qAnswerController[8],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "解説"),
-                                controller: _qNoteController[8],
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Card(
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(8),
-                                color: Theme.of(context).primaryColor,
-                                width: double.infinity,
-                                child: Text("9問目",
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .bodyText1),
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "問題文"),
-                                controller: _qTitleController[9],
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢1"),
-                                controller: _qItem1Controller[9],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢2"),
-                                controller: _qItem2Controller[9],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢3"),
-                                controller: _qItem3Controller[9],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢4"),
-                                controller: _qItem4Controller[9],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "正解"),
-                                controller: _qAnswerController[9],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "解説"),
-                                controller: _qNoteController[9],
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Card(
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(8),
-                                color: Theme.of(context).primaryColor,
-                                width: double.infinity,
-                                child: Text("10問目",
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .bodyText1),
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "問題文"),
-                                controller: _qTitleController[10],
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢1"),
-                                controller: _qItem1Controller[10],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢2"),
-                                controller: _qItem2Controller[10],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢3"),
-                                controller: _qItem3Controller[10],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "選択肢4"),
-                                controller: _qItem4Controller[10],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "正解"),
-                                controller: _qAnswerController[10],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: "解説"),
-                                controller: _qNoteController[10],
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              ),
-                            ],
-                          ),
-                        ),
+                        makeCard(1),
+                        makeCard(2),
+                        makeCard(3),
+                        makeCard(4),
+                        makeCard(5),
+                        makeCard(6),
+                        makeCard(7),
+                        makeCard(8),
+                        makeCard(9),
+                        makeCard(10),
                         Container(
                           width: double.infinity,
-                          child: ElevatedButton(
-                            child: Text('更新'),
+                          child: ElevatedButton.icon(
+                            icon: Icon(Icons.save),
+                            label: Text('保存'),
                             onPressed: () async {
                               final date = DateTime.now()
                                   .toLocal()
@@ -568,7 +139,6 @@ class _EditTestPageState extends State<EditTestPage> {
                                   .update({
                                 'author': widget.user.email,
                                 'title': _titleController.text,
-                                'password': _passwordController.text,
                                 'q01Title': _qTitleController[1].text,
                                 'q01Item1': _qItem1Controller[1].text,
                                 'q01Item2': _qItem2Controller[1].text,
@@ -648,7 +218,28 @@ class _EditTestPageState extends State<EditTestPage> {
                               );
                             },
                           ),
-                        )
+                        ),
+                        const SizedBox(height: 8),
+                        Container(
+                          width: double.infinity,
+                          child: ElevatedButton.icon(
+                            icon: Icon(Icons.delete),
+                            label: Text("削除"),
+                            onPressed: () async {
+                              await FirebaseFirestore.instance
+                                  .collection('tests')
+                                  .doc(widget.id)
+                                  .delete();
+                              await Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(builder: (context) {
+                                return MyPage(widget.user);
+                              }));
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.red, //ボタンの背景色
+                            ),
+                          ),
+                        ),
                       ],
                     );
                   }
@@ -659,21 +250,6 @@ class _EditTestPageState extends State<EditTestPage> {
                 },
               ),
             ),
-            Container(
-              child: IconButton(
-                icon: Icon(Icons.delete),
-                onPressed: () async {
-                  await FirebaseFirestore.instance
-                      .collection('tests')
-                      .doc(widget.id)
-                      .delete();
-                  await Navigator.of(context)
-                      .pushReplacement(MaterialPageRoute(builder: (context) {
-                    return MyPage(widget.user);
-                  }));
-                },
-              ),
-            )
           ],
         ),
       ),
