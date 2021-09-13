@@ -74,12 +74,12 @@ class _EntryPageState extends State<EntryPage> {
                         .doc(ss.id)
                         .snapshots()
                         .listen((event) {
-                      print(event.data);
+                      print(event.data().toString());
                       Map<String, dynamic> data = event.data()!;
-                      if (data['status'] == "1") {
+                      if (data['status'] == 1) {
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: (context) {
-                          return QuestionPage();
+                          return QuestionPage(ss.id, 1);
                         }));
                       }
                       setState(() {

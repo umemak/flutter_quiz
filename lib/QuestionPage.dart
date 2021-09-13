@@ -1,18 +1,24 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz/AnswerPage.dart';
 
-class QuestionPage extends StatelessWidget {
+class QuestionPage extends StatefulWidget {
+  QuestionPage(this.gameid, this.current);
+  final String gameid;
+  final int current;
+  @override
+  _QuestionPageState createState() => _QuestionPageState();
+}
+
+class _QuestionPageState extends State<QuestionPage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '第n問',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('第n問'),
-        ),
-        body: Center(
-          child: ChangeForm(),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('第${widget.current}問'),
+      ),
+      body: Center(
+        child: ChangeForm(),
       ),
     );
   }

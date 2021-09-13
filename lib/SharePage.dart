@@ -61,6 +61,13 @@ class _SharePageState extends State<SharePage> {
                 child: ElevatedButton(
                   child: Text('開始'),
                   onPressed: () async {
+                    await FirebaseFirestore.instance
+                        .collection('games')
+                        .doc(widget.gameid)
+                        .set({
+                      'status': 1,
+                      'current': 1,
+                    });
                     await Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) {
                         return PresenterPage(widget.user, widget.gameid);
