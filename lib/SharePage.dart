@@ -64,7 +64,7 @@ class _SharePageState extends State<SharePage> {
                     await FirebaseFirestore.instance
                         .collection('games')
                         .doc(widget.gameid)
-                        .set({
+                        .update({
                       'status': 1,
                       'current': 1,
                     });
@@ -95,7 +95,7 @@ class _SharePageState extends State<SharePage> {
                                     .collection(
                                         'games/${widget.gameid}/members')
                                     .doc(document['uid'])
-                                    .set({
+                                    .update({
                                   'joined': value,
                                 });
                               },
