@@ -22,7 +22,7 @@ class _QuestionPageState extends State<QuestionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('第${widget.current}問'),
+        title: Text('第 ${widget.current} 問'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -81,15 +81,27 @@ class _QuestionPageState extends State<QuestionPage> {
                               padding: EdgeInsets.all(8),
                               color: Theme.of(context).primaryColor,
                               width: double.infinity,
-                              child: Text("${idx.toString()}問目",
-                                  style: Theme.of(context)
-                                      .primaryTextTheme
-                                      .bodyText1),
+                              child: Text(
+                                "第 ${idx.toString()} 問",
+                                style: Theme.of(context)
+                                    .primaryTextTheme
+                                    .bodyText1,
+                              ),
                             ),
-                            Text(_qTitleController[idx]),
+                            Container(
+                              padding: EdgeInsets.all(8),
+                              child: Text(
+                                _qTitleController[idx],
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
                             makeRadioListTile(_qItem1Controller[idx], "1"),
+                            const SizedBox(height: 8),
                             makeRadioListTile(_qItem2Controller[idx], "2"),
+                            const SizedBox(height: 8),
                             makeRadioListTile(_qItem3Controller[idx], "3"),
+                            const SizedBox(height: 8),
                             makeRadioListTile(_qItem4Controller[idx], "4"),
                           ],
                         ),

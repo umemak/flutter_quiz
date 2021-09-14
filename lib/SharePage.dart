@@ -70,7 +70,8 @@ class _SharePageState extends State<SharePage> {
                     });
                     await Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) {
-                        return PresenterPage(widget.user, widget.gameid);
+                        return PresenterPage(
+                            widget.user, widget.id, widget.gameid);
                       }),
                     );
                   },
