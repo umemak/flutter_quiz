@@ -5,6 +5,7 @@ import 'package:flutter_quiz/NewTestPage.dart';
 import 'package:flutter_quiz/DetailTestPage.dart';
 
 class MyPage extends StatefulWidget {
+  static const routeName = '/mypage';
   MyPage(this.user);
   final User user;
 

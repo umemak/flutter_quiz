@@ -32,3 +32,4 @@ flutter run -d web-server --web-hostname 0.0.0.0 --web-port 3000 --web-renderer 
 - [Flutter Guide JP | Flutter Doc JP](https://flutter.ctrnost.com/)
 - [FlutterFire | FlutterFire](https://firebase.flutter.dev/)
 - [【Flutter】ラジオボタンを表示する | スクリプちん](https://dtpscriptin.com/flutter-radiolisttile/)
+- [【Flutter備忘録】Firebaseを使って再起動後もログイン状態を保持する - Qiita](https://qiita.com/Tutu12344/items/86615725c61c14f39bc4)
