@@ -118,7 +118,6 @@ class _PresenterPageState extends State<PresenterPage> {
                           ),
                         ),
                         const SizedBox(height: 8),
-                        Text("---"),
                         Expanded(
                           child: StreamBuilder<QuerySnapshot>(
                             stream: FirebaseFirestore.instance
