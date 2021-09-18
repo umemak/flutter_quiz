@@ -33,3 +33,5 @@ flutter run -d web-server --web-hostname 0.0.0.0 --web-port 3000 --web-renderer 
 - [FlutterFire | FlutterFire](https://firebase.flutter.dev/)
 - [【Flutter】ラジオボタンを表示する | スクリプちん](https://dtpscriptin.com/flutter-radiolisttile/)
 - [【Flutter備忘録】Firebaseを使って再起動後もログイン状態を保持する - Qiita](https://qiita.com/Tutu12344/items/86615725c61c14f39bc4)
+- [[Flutter]initStateで画面遷移する方法 | nobushiueshi](https://nobushiueshi.com/flutterinitstate%E3%81%A7%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/)
+

@@ -55,6 +55,12 @@ class MyApp extends StatelessWidget {
               builder: (context) => EntryPage(codeID!),
             );
           }
+          if (settingsUri.path == DetailTestPage.routeName) {
+            final testID = settingsUri.queryParameters['testid'];
+            return MaterialPageRoute(
+              builder: (context) => DetailTestPage(testID!),
+            );
+          }
           return null;
         },
       ),
@@ -115,7 +121,9 @@ class _LoginCheckState extends State<LoginCheck> {
   @override
   void initState() {
     super.initState();
-    checkUser();
+    Future(() {
+      checkUser();
+    });
   }
 
   @override
@@ -145,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final UserState userState = Provider.of<UserState>(context);
+    final UserState userState = Provider.of<UserState>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text("ログイン"),
@@ -229,7 +237,7 @@ class MyPage extends StatefulWidget {
 class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
-    final UserState userState = Provider.of<UserState>(context);
+    final UserState userState = Provider.of<UserState>(context, listen: false);
     if (userState.user != null) {
       return Scaffold(
         appBar: AppBar(
@@ -243,12 +251,12 @@ class _MyPageState extends State<MyPage> {
                 children: <Widget>[
                   Text("${userState.user!.email}"),
                   ElevatedButton(
-                    onPressed: () async {
-                      await Navigator.of(context).push(
+                    onPressed: () => {
+                      Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) {
                           return NewTestPage(userState.user!);
                         }),
-                      );
+                      ),
                     },
                     child: Text("新規問題作成"),
                   ),
@@ -273,8 +281,8 @@ class _MyPageState extends State<MyPage> {
                             title: Text(document['title']),
                             trailing: IconButton(
                               icon: Icon(Icons.arrow_right),
-                              onPressed: () async {
-                                await Navigator.of(context).push(
+                              onPressed: () {
+                                Navigator.of(context).push(
                                   MaterialPageRoute(builder: (context) {
                                     return DetailTestPage(document.id);
                                   }),
@@ -295,27 +303,29 @@ class _MyPageState extends State<MyPage> {
           ],
         ),
       );
+    } else {
+      return Scaffold(
+        body: Center(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                OutlinedButton(
+                    onPressed: () => {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return LoginCheck(nextPage: MyPage.routeName);
+                          }))
+                        },
+                    child: Text("ログイン", style: TextStyle(fontSize: 40)))
+              ]),
+        ),
+      );
     }
-    return Scaffold(
-      body: Center(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              OutlinedButton(
-                  onPressed: () => {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return LoginCheck(nextPage: MyPage.routeName);
-                        }))
-                      },
-                  child: Text("ログイン", style: TextStyle(fontSize: 40)))
-            ]),
-      ),
-    );
   }
 }
 
 class DetailTestPage extends StatefulWidget {
+  static const routeName = '/mypage';
   DetailTestPage(this.id);
   final String id;
 
@@ -326,7 +336,7 @@ class DetailTestPage extends StatefulWidget {
 class _DetailTestPageState extends State<DetailTestPage> {
   @override
   Widget build(BuildContext context) {
-    final UserState userState = Provider.of<UserState>(context);
+    // final UserState userState = Provider.of<UserState>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text("問題詳細"),
@@ -420,7 +430,7 @@ class _DetailTestPageState extends State<DetailTestPage> {
 
                     return Column(
                       children: <Widget>[
-                        Text("${userState.user!.email}"),
+                        // Text("${userState.user!.email}"),
                         TextFormField(
                           decoration: InputDecoration(labelText: "タイトル"),
                           controller: _titleController,
@@ -501,7 +511,7 @@ class EditTestPage extends StatefulWidget {
 class _EditTestPageState extends State<EditTestPage> {
   @override
   Widget build(BuildContext context) {
-    final UserState userState = Provider.of<UserState>(context);
+    final UserState userState = Provider.of<UserState>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text("問題編集"),
