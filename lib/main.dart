@@ -974,11 +974,19 @@ class _PresenterPageState extends State<PresenterPage> {
                           child: ElevatedButton.icon(
                             icon: Icon(Icons.share),
                             label: Text("回答表示"),
-                            onPressed: () async {},
+                            onPressed: () async {
+                              await FirebaseFirestore.instance
+                                  .collection('games')
+                                  .doc(widget.gameid)
+                                  .update({
+                                'status': 2,
+                                'current': 1,
+                              });
+                            },
                           ),
                         ),
                         const SizedBox(height: 8),
-                        Expanded(
+                        Container(
                           child: StreamBuilder<QuerySnapshot>(
                             stream: FirebaseFirestore.instance
                                 .collection('games/${widget.gameid}/members')
@@ -987,8 +995,10 @@ class _PresenterPageState extends State<PresenterPage> {
                               if (snapshot.hasData) {
                                 final List<DocumentSnapshot> documents =
                                     snapshot.data!.docs;
+                                print(documents);
                                 return ListView(
                                   children: documents.map((document) {
+                                    print(document);
                                     return Card(
                                       child: ListTile(
                                         title: Text(document['name'] +
