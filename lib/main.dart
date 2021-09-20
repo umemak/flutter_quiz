@@ -881,7 +881,7 @@ class _PresenterPageState extends State<PresenterPage> {
       appBar: AppBar(
         title: Text("主催者用"),
       ),
-      body: SingleChildScrollView(
+      body: Center(
         child: Column(
           children: [
             Container(
@@ -965,57 +965,58 @@ class _PresenterPageState extends State<PresenterPage> {
                       );
                     }
 
-                    return Column(
-                      children: <Widget>[
-                        makeCard(current),
-                        const SizedBox(height: 8),
-                        Container(
-                          width: double.infinity,
-                          child: ElevatedButton.icon(
-                            icon: Icon(Icons.share),
-                            label: Text("回答表示"),
-                            onPressed: () async {
-                              await FirebaseFirestore.instance
-                                  .collection('games')
-                                  .doc(widget.gameid)
-                                  .update({
-                                'status': 2,
-                                'current': 1,
-                              });
-                            },
+                    return Expanded(
+                      child: Column(
+                        children: <Widget>[
+                          makeCard(current),
+                          const SizedBox(height: 8),
+                          Container(
+                            width: double.infinity,
+                            child: ElevatedButton.icon(
+                              icon: Icon(Icons.share),
+                              label: Text("回答表示"),
+                              onPressed: () async {
+                                await FirebaseFirestore.instance
+                                    .collection('games')
+                                    .doc(widget.gameid)
+                                    .update({
+                                  'status': 2,
+                                  'current': 1,
+                                });
+                              },
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        Container(
-                          child: StreamBuilder<QuerySnapshot>(
-                            stream: FirebaseFirestore.instance
-                                .collection('games/${widget.gameid}/members')
-                                .snapshots(),
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                final List<DocumentSnapshot> documents =
-                                    snapshot.data!.docs;
-                                print(documents);
-                                return ListView(
-                                  children: documents.map((document) {
-                                    print(document);
-                                    return Card(
-                                      child: ListTile(
-                                        title: Text(document['name'] +
-                                            " : " +
-                                            document['answer']),
-                                      ),
-                                    );
-                                  }).toList(),
+                          const SizedBox(height: 8),
+                          Expanded(
+                            child: StreamBuilder<QuerySnapshot>(
+                              stream: FirebaseFirestore.instance
+                                  .collection('games/${widget.gameid}/members')
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  final List<DocumentSnapshot> documents =
+                                      snapshot.data!.docs;
+                                  print("doc: ");
+                                  return ListView(
+                                    children: documents.map((document) {
+                                      print(document.toString());
+                                      return Text(document['name']);
+                                      // child: ListTile(
+                                      //   title: Text(document['name'] +
+                                      //       " : " +
+                                      //       document['answer']),
+                                      // ),
+                                    }).toList(),
+                                  );
+                                }
+                                return Center(
+                                  child: Text("回答受付中..."),
                                 );
-                              }
-                              return Center(
-                                child: Text("回答受付中..."),
-                              );
-                            },
+                              },
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     );
                   }
                   // データが読込中の場合
