@@ -144,7 +144,8 @@ class _QuestionPageState extends State<QuestionPage> {
                                 if (data['status'] == 2) {
                                   Navigator.of(context).push(
                                       MaterialPageRoute(builder: (context) {
-                                    return AnswerPage();
+                                    return AnswerPage(
+                                        widget.gameid, widget.testid);
                                   }));
                                 }
                                 setState(() {

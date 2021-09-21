@@ -981,40 +981,62 @@ class _PresenterPageState extends State<PresenterPage> {
                                     .doc(widget.gameid)
                                     .update({
                                   'status': 2,
-                                  'current': 1,
+                                  'current': current,
                                 });
                               },
                             ),
                           ),
                           const SizedBox(height: 8),
-                          Expanded(
-                            child: StreamBuilder<QuerySnapshot>(
-                              stream: FirebaseFirestore.instance
-                                  .collection('games/${widget.gameid}/members')
-                                  .snapshots(),
-                              builder: (context, snapshot) {
-                                if (snapshot.hasData) {
-                                  final List<DocumentSnapshot> documents =
-                                      snapshot.data!.docs;
-                                  print("doc: ");
-                                  return ListView(
-                                    children: documents.map((document) {
-                                      print(document.toString());
-                                      return Text(document['name']);
-                                      // child: ListTile(
-                                      //   title: Text(document['name'] +
-                                      //       " : " +
-                                      //       document['answer']),
-                                      // ),
-                                    }).toList(),
-                                  );
-                                }
-                                return Center(
-                                  child: Text("回答受付中..."),
+                          Container(
+                            width: double.infinity,
+                            child: ElevatedButton.icon(
+                              icon: Icon(Icons.share),
+                              label: Text("つぎへ"),
+                              onPressed: () async {
+                                await FirebaseFirestore.instance
+                                    .collection('games')
+                                    .doc(widget.gameid)
+                                    .update({
+                                  'status': 1,
+                                  'current': current + 1,
+                                });
+                                await Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (context) {
+                                    return PresenterPage(
+                                        widget.testid, widget.gameid);
+                                  }),
                                 );
                               },
                             ),
                           ),
+                          // Expanded(
+                          //   child: StreamBuilder<QuerySnapshot>(
+                          //     stream: FirebaseFirestore.instance
+                          //         .collection('games/${widget.gameid}/members')
+                          //         .snapshots(),
+                          //     builder: (context, snapshot) {
+                          //       if (snapshot.hasData) {
+                          //         final List<DocumentSnapshot> documents =
+                          //             snapshot.data!.docs;
+                          //         print("doc: ");
+                          //         return ListView(
+                          //           children: documents.map((document) {
+                          //             print(document.toString());
+                          //             return Text(document['name']);
+                          //             // child: ListTile(
+                          //             //   title: Text(document['name'] +
+                          //             //       " : " +
+                          //             //       document['answer']),
+                          //             // ),
+                          //           }).toList(),
+                          //         );
+                          //       }
+                          //       return Center(
+                          //         child: Text("回答受付中..."),
+                          //       );
+                          //     },
+                          //   ),
+                          // ),
                         ],
                       ),
                     );

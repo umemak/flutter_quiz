@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz/ResultPage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class AnswerPage extends StatelessWidget {
+class AnswerPage extends StatefulWidget {
+  AnswerPage(this.gameid, this.testid);
+  final String gameid;
+  final String testid;
+  @override
+  _AnswerPageState createState() => _AnswerPageState();
+}
+
+class _AnswerPageState extends State<AnswerPage> {
   void _handleRadio(value) => {};
   @override
   Widget build(BuildContext context) {
@@ -43,14 +52,29 @@ class AnswerPage extends StatelessWidget {
               onChanged: (value) => _handleRadio(value),
             ),
             const SizedBox(height: 16),
-            OutlinedButton(
-              onPressed: () => {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return ResultPage();
-                }))
-              },
-              child: Text("結果", style: TextStyle(fontSize: 40)),
+            Container(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                icon: Icon(Icons.share),
+                label: Text("つぎへ"),
+                onPressed: () async {
+                  final FirebaseFirestore store = FirebaseFirestore.instance;
+                  store
+                      .collection('games')
+                      .doc(widget.gameid)
+                      .snapshots()
+                      .listen((event) {
+                    print(event.data().toString());
+                    Map<String, dynamic> data = event.data()!;
+                    if (data['status'] == 1) {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return ResultPage();
+                      }));
+                    }
+                  });
+                },
+              ),
             ),
           ],
         ),
