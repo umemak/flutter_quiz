@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/LoginPage.dart';
-import 'package:flutter_quiz/EntryPage.dart';
+
+import 'EntryPage.dart';
+import 'LoginCheck.dart';
+import 'MyPage.dart';
 
 class TopPage extends StatelessWidget {
   @override
@@ -23,7 +25,7 @@ class TopPage extends StatelessWidget {
                   onPressed: () => {
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: (context) {
-                          return LoginPage();
+                          return LoginCheck(nextPage: MyPage.routeName);
                         }))
                       },
                   child: Text("問題作成・編集", style: TextStyle(fontSize: 40)))

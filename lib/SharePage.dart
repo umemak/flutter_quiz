@@ -1,16 +1,15 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_quiz/PresenterPage.dart';
-import 'package:flutter_quiz/EntryPage.dart';
-import 'package:qr_flutter/qr_flutter.dart';
-import 'package:flutter/services.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html';
 
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'package:flutter/services.dart';
+
+import 'PresenterPage.dart';
+
 class SharePage extends StatefulWidget {
-  SharePage(this.user, this.id, this.title, this.code, this.gameid);
-  final User user;
+  SharePage(this.id, this.title, this.code, this.gameid);
   final String id;
   final String title;
   final String code;
@@ -70,8 +69,7 @@ class _SharePageState extends State<SharePage> {
                     });
                     await Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) {
-                        return PresenterPage(
-                            widget.user, widget.id, widget.gameid);
+                        return PresenterPage(widget.id, widget.gameid);
                       }),
                     );
                   },

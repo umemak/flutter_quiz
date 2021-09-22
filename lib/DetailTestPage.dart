@@ -1,14 +1,15 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_quiz/MyPage.dart';
-import 'package:flutter_quiz/SharePage.dart';
-import 'package:flutter_quiz/EditTestPage.dart';
 import 'dart:math';
 
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
+
+import 'EditTestPage.dart';
+import 'SharePage.dart';
+
 class DetailTestPage extends StatefulWidget {
-  DetailTestPage(this.user, this.id);
-  final User user;
+  static const routeName = '/mypage';
+  DetailTestPage(this.id);
   final String id;
 
   @override
@@ -18,6 +19,7 @@ class DetailTestPage extends StatefulWidget {
 class _DetailTestPageState extends State<DetailTestPage> {
   @override
   Widget build(BuildContext context) {
+    // final UserState userState = Provider.of<UserState>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text("問題詳細"),
@@ -111,7 +113,7 @@ class _DetailTestPageState extends State<DetailTestPage> {
 
                     return Column(
                       children: <Widget>[
-                        Text("${widget.user.email}"),
+                        // Text("${userState.user!.email}"),
                         TextFormField(
                           decoration: InputDecoration(labelText: "タイトル"),
                           controller: _titleController,
@@ -135,7 +137,7 @@ class _DetailTestPageState extends State<DetailTestPage> {
                             onPressed: () async {
                               await Navigator.of(context).push(
                                 MaterialPageRoute(builder: (context) {
-                                  return EditTestPage(widget.user, widget.id);
+                                  return EditTestPage(widget.id);
                                 }),
                               );
                             },
@@ -158,7 +160,7 @@ class _DetailTestPageState extends State<DetailTestPage> {
                               });
                               await Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(builder: (context) {
-                                return SharePage(widget.user, widget.id,
+                                return SharePage(widget.id,
                                     _titleController.text, code, ref.id);
                               }));
                             },

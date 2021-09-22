@@ -52,7 +52,7 @@ class _NewTestPageState extends State<NewTestPage> {
                     });
                     await Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) {
-                        return MyPage(widget.user);
+                        return MyPage();
                       }),
                     );
                   },

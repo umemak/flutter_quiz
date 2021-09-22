@@ -1,11 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/MyPage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
+
+import 'UserState.dart';
+import 'MyPage.dart';
 
 class EditTestPage extends StatefulWidget {
-  EditTestPage(this.user, this.id);
-  final User user;
+  EditTestPage(this.id);
   final String id;
 
   @override
@@ -15,6 +17,7 @@ class EditTestPage extends StatefulWidget {
 class _EditTestPageState extends State<EditTestPage> {
   @override
   Widget build(BuildContext context) {
+    final UserState userState = Provider.of<UserState>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text("問題編集"),
@@ -108,7 +111,7 @@ class _EditTestPageState extends State<EditTestPage> {
 
                     return Column(
                       children: <Widget>[
-                        Text("${widget.user.email}"),
+                        Text("${userState.user!.email}"),
                         TextFormField(
                           decoration: InputDecoration(labelText: "タイトル"),
                           controller: _titleController,
@@ -137,7 +140,7 @@ class _EditTestPageState extends State<EditTestPage> {
                                   .collection('tests')
                                   .doc(widget.id)
                                   .update({
-                                'author': widget.user.email,
+                                'author': userState.user!.email,
                                 'title': _titleController.text,
                                 'q01Title': _qTitleController[1].text,
                                 'q01Item1': _qItem1Controller[1].text,
@@ -213,7 +216,7 @@ class _EditTestPageState extends State<EditTestPage> {
                               });
                               await Navigator.of(context).push(
                                 MaterialPageRoute(builder: (context) {
-                                  return MyPage(widget.user);
+                                  return MyPage();
                                 }),
                               );
                             },
@@ -232,7 +235,7 @@ class _EditTestPageState extends State<EditTestPage> {
                                   .delete();
                               await Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(builder: (context) {
-                                return MyPage(widget.user);
+                                return MyPage();
                               }));
                             },
                             style: ElevatedButton.styleFrom(

@@ -1,11 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/TopPage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PresenterPage extends StatefulWidget {
-  PresenterPage(this.user, this.testid, this.gameid);
-  final User user;
+  PresenterPage(this.testid, this.gameid);
   final String testid;
   final String gameid;
 
@@ -21,7 +18,7 @@ class _PresenterPageState extends State<PresenterPage> {
       appBar: AppBar(
         title: Text("主催者用"),
       ),
-      body: SingleChildScrollView(
+      body: Center(
         child: Column(
           children: [
             Container(
@@ -105,47 +102,80 @@ class _PresenterPageState extends State<PresenterPage> {
                       );
                     }
 
-                    return Column(
-                      children: <Widget>[
-                        makeCard(current),
-                        const SizedBox(height: 8),
-                        Container(
-                          width: double.infinity,
-                          child: ElevatedButton.icon(
-                            icon: Icon(Icons.share),
-                            label: Text("回答表示"),
-                            onPressed: () async {},
+                    return Expanded(
+                      child: Column(
+                        children: <Widget>[
+                          makeCard(current),
+                          const SizedBox(height: 8),
+                          Container(
+                            width: double.infinity,
+                            child: ElevatedButton.icon(
+                              icon: Icon(Icons.share),
+                              label: Text("回答表示"),
+                              onPressed: () async {
+                                await FirebaseFirestore.instance
+                                    .collection('games')
+                                    .doc(widget.gameid)
+                                    .update({
+                                  'status': 2,
+                                  'current': current,
+                                });
+                              },
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        Expanded(
-                          child: StreamBuilder<QuerySnapshot>(
-                            stream: FirebaseFirestore.instance
-                                .collection('games/${widget.gameid}/members')
-                                .snapshots(),
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                final List<DocumentSnapshot> documents =
-                                    snapshot.data!.docs;
-                                return ListView(
-                                  children: documents.map((document) {
-                                    return Card(
-                                      child: ListTile(
-                                        title: Text(document['name'] +
-                                            " : " +
-                                            document['answer']),
-                                      ),
-                                    );
-                                  }).toList(),
+                          const SizedBox(height: 8),
+                          Container(
+                            width: double.infinity,
+                            child: ElevatedButton.icon(
+                              icon: Icon(Icons.share),
+                              label: Text("つぎへ"),
+                              onPressed: () async {
+                                await FirebaseFirestore.instance
+                                    .collection('games')
+                                    .doc(widget.gameid)
+                                    .update({
+                                  'status': 1,
+                                  'current': current + 1,
+                                });
+                                await Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (context) {
+                                    return PresenterPage(
+                                        widget.testid, widget.gameid);
+                                  }),
                                 );
-                              }
-                              return Center(
-                                child: Text("回答受付中..."),
-                              );
-                            },
+                              },
+                            ),
                           ),
-                        ),
-                      ],
+                          // Expanded(
+                          //   child: StreamBuilder<QuerySnapshot>(
+                          //     stream: FirebaseFirestore.instance
+                          //         .collection('games/${widget.gameid}/members')
+                          //         .snapshots(),
+                          //     builder: (context, snapshot) {
+                          //       if (snapshot.hasData) {
+                          //         final List<DocumentSnapshot> documents =
+                          //             snapshot.data!.docs;
+                          //         print("doc: ");
+                          //         return ListView(
+                          //           children: documents.map((document) {
+                          //             print(document.toString());
+                          //             return Text(document['name']);
+                          //             // child: ListTile(
+                          //             //   title: Text(document['name'] +
+                          //             //       " : " +
+                          //             //       document['answer']),
+                          //             // ),
+                          //           }).toList(),
+                          //         );
+                          //       }
+                          //       return Center(
+                          //         child: Text("回答受付中..."),
+                          //       );
+                          //     },
+                          //   ),
+                          // ),
+                        ],
+                      ),
                     );
                   }
                   // データが読込中の場合

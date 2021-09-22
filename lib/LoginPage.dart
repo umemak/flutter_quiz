@@ -1,35 +1,27 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_quiz/MyPage.dart';
-import 'package:flutter_quiz/SignupPage.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class LoginPage extends StatelessWidget {
+import 'SignupPage.dart';
+import 'MyPage.dart';
+import 'UserState.dart';
+
+class LoginPage extends StatefulWidget {
+  static const routeName = '/login';
+  LoginPage({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      // title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyAuthPage(),
-    );
-  }
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class MyAuthPage extends StatefulWidget {
-  @override
-  _MyAuthPageState createState() => _MyAuthPageState();
-}
-
-class _MyAuthPageState extends State<MyAuthPage> {
+class _LoginPageState extends State<LoginPage> {
   String loginUserEmail = "";
   String loginUserPassword = "";
   String infoText = "";
 
   @override
   Widget build(BuildContext context) {
+    final UserState userState = Provider.of<UserState>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text("ログイン"),
@@ -69,12 +61,13 @@ class _MyAuthPageState extends State<MyAuthPage> {
                     );
                     // ログインに成功した場合
                     final User user = result.user!;
+                    userState.setUser(user);
                     setState(() {
                       infoText = "ログインOK：${user.email}";
                     });
                     await Navigator.of(context)
                         .pushReplacement(MaterialPageRoute(builder: (context) {
-                      return MyPage(result.user!);
+                      return MyPage();
                     }));
                   } catch (e) {
                     // ログインに失敗した場合
