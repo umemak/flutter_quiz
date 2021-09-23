@@ -70,8 +70,7 @@ class _AnswerPageState extends State<AnswerPage> {
                     if (data['status'] == 1) {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
-                        return QuestionPage(
-                            widget.gameid, widget.testid, data['current']);
+                        return QuestionPage(widget.gameid, widget.testid);
                       }));
                     }
                     if (data['status'] == 3) {

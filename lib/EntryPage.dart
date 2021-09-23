@@ -79,7 +79,7 @@ class _EntryPageState extends State<EntryPage> {
                       if (data['status'] == 1) {
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: (context) {
-                          return QuestionPage(ss.id, data['test'], 1);
+                          return QuestionPage(ss.id, data['test']);
                         }));
                       }
                       setState(() {
