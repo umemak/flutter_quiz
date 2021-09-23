@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz/ResultPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'QuestionPage.dart';
 
 class AnswerPage extends StatefulWidget {
   AnswerPage(this.gameid, this.testid);
@@ -69,7 +70,14 @@ class _AnswerPageState extends State<AnswerPage> {
                     if (data['status'] == 1) {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
-                        return ResultPage();
+                        return QuestionPage(
+                            widget.gameid, widget.testid, data['current']);
+                      }));
+                    }
+                    if (data['status'] == 3) {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return ResultPage(widget.gameid, widget.testid);
                       }));
                     }
                   });

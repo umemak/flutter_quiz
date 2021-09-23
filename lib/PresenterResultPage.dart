@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz/TopPage.dart';
 
-class ResultPage extends StatefulWidget {
-  ResultPage(this.gameid, this.testid);
+class PresenterResultPage extends StatefulWidget {
+  PresenterResultPage(this.gameid, this.testid);
   final String gameid;
   final String testid;
   @override
-  _ResultPageState createState() => _ResultPageState();
+  _PresenterResultPageState createState() => _PresenterResultPageState();
 }
 
-class _ResultPageState extends State<ResultPage> {
+class _PresenterResultPageState extends State<PresenterResultPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'PresenterResultPage.dart';
 
 class PresenterPage extends StatefulWidget {
   PresenterPage(this.testid, this.gameid);
@@ -16,7 +17,7 @@ class _PresenterPageState extends State<PresenterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("主催者用"),
+        title: Text("主催者用ページ"),
       ),
       body: Center(
         child: Column(
@@ -140,6 +141,28 @@ class _PresenterPageState extends State<PresenterPage> {
                                 await Navigator.of(context).push(
                                   MaterialPageRoute(builder: (context) {
                                     return PresenterPage(
+                                        widget.testid, widget.gameid);
+                                  }),
+                                );
+                              },
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Container(
+                            width: double.infinity,
+                            child: ElevatedButton.icon(
+                              icon: Icon(Icons.share),
+                              label: Text("結果発表"),
+                              onPressed: () async {
+                                await FirebaseFirestore.instance
+                                    .collection('games')
+                                    .doc(widget.gameid)
+                                    .update({
+                                  'status': 3,
+                                });
+                                await Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (context) {
+                                    return PresenterResultPage(
                                         widget.testid, widget.gameid);
                                   }),
                                 );
