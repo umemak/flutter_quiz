@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/AnswerPage.dart';
+import 'AnswerPage.dart';
 import 'ResultPage.dart';
 
 class QuestionPage extends StatefulWidget {
-  QuestionPage(this.gameid, this.testid);
+  QuestionPage(this.gameid);
   final String gameid;
-  final String testid;
   @override
   _QuestionPageState createState() => _QuestionPageState();
 }
@@ -52,7 +51,7 @@ class _QuestionPageState extends State<QuestionPage> {
                     child: FutureBuilder<DocumentSnapshot>(
                       future: FirebaseFirestore.instance
                           .collection('tests')
-                          .doc(widget.testid)
+                          .doc(gamedata['test'])
                           .get(),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
@@ -172,16 +171,14 @@ class _QuestionPageState extends State<QuestionPage> {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (context) {
-                                          return AnswerPage(
-                                              widget.gameid, widget.testid);
+                                          return AnswerPage(widget.gameid);
                                         }));
                                       }
                                       if (data['status'] == 3) {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (context) {
-                                          return ResultPage(
-                                              widget.gameid, widget.testid);
+                                          return ResultPage(widget.gameid);
                                         }));
                                       }
                                       setState(() {

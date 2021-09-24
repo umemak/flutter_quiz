@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quiz/TopPage.dart';
 
 class ResultPage extends StatefulWidget {
-  ResultPage(this.gameid, this.testid);
+  ResultPage(this.gameid);
   final String gameid;
-  final String testid;
   @override
   _ResultPageState createState() => _ResultPageState();
 }
