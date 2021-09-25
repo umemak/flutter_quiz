@@ -214,7 +214,7 @@ class _EditTestPageState extends State<EditTestPage> {
                                 'q10Note': _qNoteController[10].text,
                                 'date': date
                               });
-                              await Navigator.of(context).push(
+                              Navigator.of(context).push(
                                 MaterialPageRoute(builder: (context) {
                                   return MyPage();
                                 }),
@@ -233,7 +233,7 @@ class _EditTestPageState extends State<EditTestPage> {
                                   .collection('tests')
                                   .doc(widget.id)
                                   .delete();
-                              await Navigator.of(context).pushReplacement(
+                              Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(builder: (context) {
                                 return MyPage();
                               }));

@@ -1,8 +1,10 @@
+import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'AnswerPage.dart';
 import 'ResultPage.dart';
+import 'UserState.dart';
 
 class QuestionPage extends StatefulWidget {
   QuestionPage(this.gameid);
@@ -20,6 +22,8 @@ class _QuestionPageState extends State<QuestionPage> {
 
   @override
   Widget build(BuildContext context) {
+    final PlayerState playerState =
+        Provider.of<PlayerState>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text('問題'),
@@ -142,49 +146,70 @@ class _QuestionPageState extends State<QuestionPage> {
                                   icon: Icon(Icons.share),
                                   label: Text("決定"),
                                   onPressed: () async {
-                                    final FirebaseAuth auth =
-                                        FirebaseAuth.instance;
-                                    final UserCredential result =
-                                        await auth.signInAnonymously();
-                                    final User user = result.user!;
-                                    final ref = await FirebaseFirestore.instance
-                                        .collection(
-                                            'games/${widget.gameid}/members')
-                                        .doc(user.uid)
-                                        .update({
-                                      'a${gamedata['current']}': _type,
-                                    });
-                                    // 開始ステータス待ち
-                                    setState(() {
-                                      infoText = "お待ちください";
-                                    });
-                                    final FirebaseFirestore store =
-                                        FirebaseFirestore.instance;
-                                    store
-                                        .collection('games')
-                                        .doc(widget.gameid)
-                                        .snapshots()
-                                        .listen((event) {
-                                      print(event.data().toString());
-                                      Map<String, dynamic> data = event.data()!;
-                                      if (data['status'] == 2) {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) {
-                                          return AnswerPage(widget.gameid);
-                                        }));
-                                      }
-                                      if (data['status'] == 3) {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) {
-                                          return ResultPage(widget.gameid);
-                                        }));
-                                      }
-                                      setState(() {
-                                        infoText = "status：${data['status']}";
+                                    try {
+                                      final FirebaseAuth auth =
+                                          FirebaseAuth.instance;
+                                      final UserCredential result =
+                                          await auth.signInAnonymously();
+                                      final User user = playerState.user!;
+                                      await FirebaseFirestore.instance
+                                          .collection(
+                                              'games/${widget.gameid}/members')
+                                          .doc(user.uid)
+                                          .update({
+                                        'a${gamedata['current']}': _type,
                                       });
-                                    });
+                                      // 開始ステータス待ち
+                                      setState(() {
+                                        infoText = "お待ちください";
+                                      });
+                                      final FirebaseFirestore store =
+                                          FirebaseFirestore.instance;
+                                      store
+                                          .collection('games')
+                                          .doc(widget.gameid)
+                                          .snapshots()
+                                          .listen((event) {
+                                        print(event.data().toString());
+                                        Map<String, dynamic> data =
+                                            event.data()!;
+                                        if (data['status'] == 2) {
+                                          try {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) {
+                                                  return AnswerPage(
+                                                      widget.gameid);
+                                                },
+                                              ),
+                                            );
+                                          } catch (e) {
+                                            print(e.toString());
+                                          }
+                                        }
+                                        if (data['status'] == 3) {
+                                          try {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) {
+                                                  return ResultPage(
+                                                      widget.gameid);
+                                                },
+                                              ),
+                                            );
+                                          } catch (e) {
+                                            print(e.toString());
+                                          }
+                                        }
+                                        setState(() {
+                                          infoText = "status：${data['status']}";
+                                        });
+                                      });
+                                    } catch (e) {
+                                      setState(() {
+                                        infoText = e.toString();
+                                      });
+                                    }
                                   },
                                 ),
                               ),

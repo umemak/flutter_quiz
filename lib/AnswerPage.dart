@@ -131,7 +131,13 @@ class _AnswerPageState extends State<AnswerPage> {
                                   const SizedBox(height: 8),
                                   Text("正解：" + _qAnswerController[idx]),
                                   const SizedBox(height: 8),
-                                  Text(_qNoteController[idx]),
+                                  Container(
+                                    padding: EdgeInsets.all(8),
+                                    child: Text(
+                                      _qNoteController[idx],
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
                                 ],
                               ),
                             );

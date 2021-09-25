@@ -9,3 +9,12 @@ class UserState extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+class PlayerState extends ChangeNotifier {
+  User? user;
+
+  void setPlayer(User newUser) {
+    user = newUser;
+    notifyListeners();
+  }
+}

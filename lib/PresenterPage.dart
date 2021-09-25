@@ -138,11 +138,13 @@ class _PresenterPageState extends State<PresenterPage> {
                                   'status': 1,
                                   'current': current + 1,
                                 });
-                                await Navigator.of(context).push(
-                                  MaterialPageRoute(builder: (context) {
-                                    return PresenterPage(
-                                        widget.testid, widget.gameid);
-                                  }),
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return PresenterPage(
+                                          widget.testid, widget.gameid);
+                                    },
+                                  ),
                                 );
                               },
                             ),
@@ -160,11 +162,13 @@ class _PresenterPageState extends State<PresenterPage> {
                                     .update({
                                   'status': 3,
                                 });
-                                await Navigator.of(context).push(
-                                  MaterialPageRoute(builder: (context) {
-                                    return PresenterResultPage(
-                                        widget.testid, widget.gameid);
-                                  }),
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return PresenterResultPage(
+                                          widget.testid, widget.gameid);
+                                    },
+                                  ),
                                 );
                               },
                             ),

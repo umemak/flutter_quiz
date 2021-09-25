@@ -8,7 +8,7 @@ import 'EditTestPage.dart';
 import 'SharePage.dart';
 
 class DetailTestPage extends StatefulWidget {
-  static const routeName = '/mypage';
+  static const routeName = '/test';
   DetailTestPage(this.id);
   final String id;
 
@@ -134,8 +134,8 @@ class _DetailTestPageState extends State<DetailTestPage> {
                           child: ElevatedButton.icon(
                             icon: Icon(Icons.edit),
                             label: Text('編集'),
-                            onPressed: () async {
-                              await Navigator.of(context).push(
+                            onPressed: () {
+                              Navigator.of(context).push(
                                 MaterialPageRoute(builder: (context) {
                                   return EditTestPage(widget.id);
                                 }),
@@ -158,7 +158,7 @@ class _DetailTestPageState extends State<DetailTestPage> {
                                 "status": 0,
                                 "test": widget.id,
                               });
-                              await Navigator.of(context).pushReplacement(
+                              Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(builder: (context) {
                                 return SharePage(widget.id,
                                     _titleController.text, code, ref.id);

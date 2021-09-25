@@ -65,10 +65,13 @@ class _LoginPageState extends State<LoginPage> {
                     setState(() {
                       infoText = "ログインOK：${user.email}";
                     });
-                    await Navigator.of(context)
-                        .pushReplacement(MaterialPageRoute(builder: (context) {
-                      return MyPage();
-                    }));
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return MyPage();
+                        },
+                      ),
+                    );
                   } catch (e) {
                     // ログインに失敗した場合
                     setState(() {

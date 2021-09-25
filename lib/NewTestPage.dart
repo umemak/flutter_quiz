@@ -50,7 +50,7 @@ class _NewTestPageState extends State<NewTestPage> {
                       'title': testTitle,
                       'date': date
                     });
-                    await Navigator.of(context).push(
+                    Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) {
                         return MyPage();
                       }),

@@ -14,6 +14,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final UserState userState = UserState();
+  final PlayerState playerState = PlayerState();
 
   @override
   Widget build(BuildContext context) {
@@ -32,22 +33,16 @@ class MyApp extends StatelessWidget {
           LoginPage.routeName: (BuildContext context) => LoginPage(),
           MyPage.routeName: (BuildContext context) => MyPage(),
         },
-        onGenerateRoute: (settings) {
-          final settingsUri = Uri.parse(settings.name!);
-          if (settingsUri.path == EntryPage.routeName) {
-            final codeID = settingsUri.queryParameters['code'];
-            return MaterialPageRoute(
-              builder: (context) => EntryPage(codeID!),
-            );
-          }
-          if (settingsUri.path == DetailTestPage.routeName) {
-            final testID = settingsUri.queryParameters['testid'];
-            return MaterialPageRoute(
-              builder: (context) => DetailTestPage(testID!),
-            );
-          }
-          return null;
-        },
+        // onGenerateRoute: (settings) {
+        //   final settingsUri = Uri.parse(settings.name!);
+        //   if (settingsUri.path == EntryPage.routeName) {
+        //     final codeID = settingsUri.queryParameters['code'];
+        //     return MaterialPageRoute(
+        //       builder: (context) => EntryPage(codeID!),
+        //     );
+        //   }
+        //   return null;
+        // },
       ),
     );
   }

@@ -67,10 +67,12 @@ class _SharePageState extends State<SharePage> {
                       'status': 1,
                       'current': 1,
                     });
-                    await Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) {
-                        return PresenterPage(widget.id, widget.gameid);
-                      }),
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return PresenterPage(widget.id, widget.gameid);
+                        },
+                      ),
                     );
                   },
                 ),

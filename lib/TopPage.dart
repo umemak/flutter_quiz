@@ -16,17 +16,25 @@ class TopPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               OutlinedButton(
-                  onPressed: () => Navigator.of(context).pushNamed(
-                        EntryPage.routeName,
-                        arguments: {'code': ''},
-                      ),
+                  onPressed: () => {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return EntryPage();
+                            },
+                          ),
+                        ),
+                      },
                   child: Text("参加する", style: TextStyle(fontSize: 40))),
               OutlinedButton(
                   onPressed: () => {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return LoginCheck(nextPage: MyPage.routeName);
-                        }))
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return LoginCheck(nextPage: MyPage.routeName);
+                            },
+                          ),
+                        ),
                       },
                   child: Text("問題作成・編集", style: TextStyle(fontSize: 40)))
             ]),

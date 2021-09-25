@@ -1,12 +1,14 @@
+import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/QuestionPage.dart';
+import 'QuestionPage.dart';
+import 'UserState.dart';
 
 class EntryPage extends StatefulWidget {
   static const routeName = '/entry';
-  EntryPage(this.codeID);
-  final String codeID;
+  // EntryPage(this.codeID);
+  // final String codeID;
 
   @override
   _EntryPageState createState() => _EntryPageState();
@@ -16,7 +18,9 @@ class _EntryPageState extends State<EntryPage> {
   String infoText = "";
   @override
   Widget build(BuildContext context) {
-    final _codeController = TextEditingController(text: widget.codeID);
+    final PlayerState playerState =
+        Provider.of<PlayerState>(context, listen: false);
+    final _codeController = TextEditingController(text: "");
     final _nameController = TextEditingController(text: "");
     return Scaffold(
       appBar: AppBar(
@@ -43,6 +47,7 @@ class _EntryPageState extends State<EntryPage> {
                   final FirebaseAuth auth = FirebaseAuth.instance;
                   final UserCredential result = await auth.signInAnonymously();
                   final User user = result.user!;
+                  playerState.setPlayer(user);
                   // 参加コード確認
                   final FirebaseFirestore store = FirebaseFirestore.instance;
                   final DocumentSnapshot ss = await store
@@ -77,10 +82,13 @@ class _EntryPageState extends State<EntryPage> {
                       print(event.data().toString());
                       Map<String, dynamic> data = event.data()!;
                       if (data['status'] == 1) {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return QuestionPage(ss.id);
-                        }));
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return QuestionPage(ss.id);
+                            },
+                          ),
+                        );
                       }
                       setState(() {
                         infoText = "status：${data['status']}";
