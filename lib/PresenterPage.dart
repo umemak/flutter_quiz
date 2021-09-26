@@ -24,6 +24,7 @@ class _PresenterPageState extends State<PresenterPage> {
           children: [
             Container(
               padding: EdgeInsets.all(32),
+              height: 1000,
               child: FutureBuilder<DocumentSnapshot>(
                 future: FirebaseFirestore.instance
                     .collection('tests')
@@ -103,106 +104,107 @@ class _PresenterPageState extends State<PresenterPage> {
                       );
                     }
 
-                    return Expanded(
-                      child: Column(
-                        children: <Widget>[
-                          makeCard(current),
-                          const SizedBox(height: 8),
-                          Container(
-                            width: double.infinity,
-                            child: ElevatedButton.icon(
-                              icon: Icon(Icons.share),
-                              label: Text("回答表示"),
-                              onPressed: () async {
-                                await FirebaseFirestore.instance
-                                    .collection('games')
-                                    .doc(widget.gameid)
-                                    .update({
-                                  'status': 2,
-                                  'current': current,
-                                });
-                              },
-                            ),
+                    return Column(
+                      children: <Widget>[
+                        makeCard(current),
+                        const SizedBox(height: 8),
+                        Container(
+                          width: double.infinity,
+                          child: ElevatedButton.icon(
+                            icon: Icon(Icons.share),
+                            label: Text("回答表示"),
+                            onPressed: () async {
+                              await FirebaseFirestore.instance
+                                  .collection('games')
+                                  .doc(widget.gameid)
+                                  .update({
+                                'status': 2,
+                                'current': current,
+                              });
+                            },
                           ),
-                          const SizedBox(height: 8),
-                          Container(
-                            width: double.infinity,
-                            child: ElevatedButton.icon(
-                              icon: Icon(Icons.share),
-                              label: Text("つぎへ"),
-                              onPressed: () async {
-                                await FirebaseFirestore.instance
-                                    .collection('games')
-                                    .doc(widget.gameid)
-                                    .update({
-                                  'status': 1,
-                                  'current': current + 1,
-                                });
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return PresenterPage(
-                                          widget.testid, widget.gameid);
-                                    },
-                                  ),
+                        ),
+                        const SizedBox(height: 8),
+                        Container(
+                          width: double.infinity,
+                          child: ElevatedButton.icon(
+                            icon: Icon(Icons.share),
+                            label: Text("つぎへ"),
+                            onPressed: () async {
+                              await FirebaseFirestore.instance
+                                  .collection('games')
+                                  .doc(widget.gameid)
+                                  .update({
+                                'status': 1,
+                                'current': current + 1,
+                              });
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return PresenterPage(
+                                        widget.testid, widget.gameid);
+                                  },
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Container(
+                          width: double.infinity,
+                          child: ElevatedButton.icon(
+                            icon: Icon(Icons.share),
+                            label: Text("結果発表"),
+                            onPressed: () async {
+                              await FirebaseFirestore.instance
+                                  .collection('games')
+                                  .doc(widget.gameid)
+                                  .update({
+                                'status': 3,
+                              });
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return PresenterResultPage(
+                                        widget.testid, widget.gameid);
+                                  },
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        Expanded(
+                          child: StreamBuilder<QuerySnapshot>(
+                            stream: FirebaseFirestore.instance
+                                .collection('games/${widget.gameid}/members')
+                                .snapshots(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                final List<DocumentSnapshot> documents =
+                                    snapshot.data!.docs;
+                                return ListView(
+                                  children: documents.map((document) {
+                                    print("doc: " + document['name']);
+                                    return Card(
+                                      child: Text(
+                                        document['name'],
+                                      ),
+                                    );
+                                    // child: ListTile(
+                                    //   title: Text(document['name'] +
+                                    //       " : " +
+                                    //       document['answer']),
+                                    // ),
+                                  }).toList(),
                                 );
-                              },
-                            ),
+                              }
+                              return Center(
+                                child: Text("回答受付中..."),
+                              );
+                            },
                           ),
-                          const SizedBox(height: 8),
-                          Container(
-                            width: double.infinity,
-                            child: ElevatedButton.icon(
-                              icon: Icon(Icons.share),
-                              label: Text("結果発表"),
-                              onPressed: () async {
-                                await FirebaseFirestore.instance
-                                    .collection('games')
-                                    .doc(widget.gameid)
-                                    .update({
-                                  'status': 3,
-                                });
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return PresenterResultPage(
-                                          widget.testid, widget.gameid);
-                                    },
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          // Expanded(
-                          //   child: StreamBuilder<QuerySnapshot>(
-                          //     stream: FirebaseFirestore.instance
-                          //         .collection('games/${widget.gameid}/members')
-                          //         .snapshots(),
-                          //     builder: (context, snapshot) {
-                          //       if (snapshot.hasData) {
-                          //         final List<DocumentSnapshot> documents =
-                          //             snapshot.data!.docs;
-                          //         print("doc: ");
-                          //         return ListView(
-                          //           children: documents.map((document) {
-                          //             print(document.toString());
-                          //             return Text(document['name']);
-                          //             // child: ListTile(
-                          //             //   title: Text(document['name'] +
-                          //             //       " : " +
-                          //             //       document['answer']),
-                          //             // ),
-                          //           }).toList(),
-                          //         );
-                          //       }
-                          //       return Center(
-                          //         child: Text("回答受付中..."),
-                          //       );
-                          //     },
-                          //   ),
-                          // ),
-                        ],
-                      ),
+                        ),
+                      ],
                     );
                   }
                   // データが読込中の場合
