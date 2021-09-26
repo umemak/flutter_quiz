@@ -3,18 +3,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class UserState extends ChangeNotifier {
   User? user;
+  User? player;
 
   void setUser(User newUser) {
     user = newUser;
     notifyListeners();
   }
-}
-
-class PlayerState extends ChangeNotifier {
-  User? user;
 
   void setPlayer(User newUser) {
-    user = newUser;
+    player = newUser;
     notifyListeners();
   }
 }

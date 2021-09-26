@@ -20,7 +20,7 @@ class TopPage extends StatelessWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) {
-                              return EntryPage();
+                              return EntryPage("");
                             },
                           ),
                         ),

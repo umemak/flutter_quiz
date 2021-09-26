@@ -14,13 +14,11 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final UserState userState = UserState();
-  final PlayerState playerState = PlayerState();
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<UserState>.value(
       value: userState,
-      // create: (context) => UserState(),
       child: MaterialApp(
         // debugShowCheckedModeBanner: false,
         title: 'Flutter Quiz',
@@ -33,16 +31,16 @@ class MyApp extends StatelessWidget {
           LoginPage.routeName: (BuildContext context) => LoginPage(),
           MyPage.routeName: (BuildContext context) => MyPage(),
         },
-        // onGenerateRoute: (settings) {
-        //   final settingsUri = Uri.parse(settings.name!);
-        //   if (settingsUri.path == EntryPage.routeName) {
-        //     final codeID = settingsUri.queryParameters['code'];
-        //     return MaterialPageRoute(
-        //       builder: (context) => EntryPage(codeID!),
-        //     );
-        //   }
-        //   return null;
-        // },
+        onGenerateRoute: (settings) {
+          final settingsUri = Uri.parse(settings.name!);
+          if (settingsUri.path == EntryPage.routeName) {
+            final codeID = settingsUri.queryParameters['code'];
+            return MaterialPageRoute(
+              builder: (context) => EntryPage(codeID!),
+            );
+          }
+          return null;
+        },
       ),
     );
   }

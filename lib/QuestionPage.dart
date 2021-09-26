@@ -22,8 +22,7 @@ class _QuestionPageState extends State<QuestionPage> {
 
   @override
   Widget build(BuildContext context) {
-    final PlayerState playerState =
-        Provider.of<PlayerState>(context, listen: false);
+    final UserState userState = Provider.of<UserState>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text('問題'),
@@ -151,7 +150,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                           FirebaseAuth.instance;
                                       final UserCredential result =
                                           await auth.signInAnonymously();
-                                      final User user = playerState.user!;
+                                      final User user = userState.player!;
                                       await FirebaseFirestore.instance
                                           .collection(
                                               'games/${widget.gameid}/members')
