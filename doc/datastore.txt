@@ -1,4 +1,4 @@
-Test[] - 問題
+Tests - 問題
   Title: String - 問題名 - AWS用語集
   Question[] - 設問
     Title: String - 問題文 - EC2の説明として正しいものは？
@@ -13,7 +13,7 @@ Test[] - 問題
   Password: String - 限定公開用パスワード
   Author: String - 作成者UID
 
-Game[]
+Games
   Entry[]
     Name: String
     UID: String
@@ -23,3 +23,6 @@ Game[]
       Time: Time
       Correct: Bool
   Status: int - 1:参加受付中、2:n問目回答中、3:n問目結果表示中、4:最終結果表示中
+
+Players/GameID/
+  UID

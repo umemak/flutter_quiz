@@ -1,5 +1,9 @@
+import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/TopPage.dart';
+import 'TopPage.dart';
+import 'UserState.dart';
 
 class ResultPage extends StatefulWidget {
   ResultPage(this.gameid);
@@ -17,61 +21,29 @@ class _ResultPageState extends State<ResultPage> {
       ),
       body: Container(
         padding: EdgeInsets.all(64),
-        child: ListView(
-          children: <Widget>[
-            Card(
-              child: ListTile(
-                leading: Text("1位"),
-                title: Text("ふくだ"),
-                subtitle: Text("3point"),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: Text("2位"),
-                title: Text("むね"),
-                subtitle: Text("3point"),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: Text("3位"),
-                title: Text("よしだ"),
-                subtitle: Text("3point"),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: Text("4位"),
-                title: Text("すぎもと"),
-                subtitle: Text("3point"),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: Text("5位"),
-                title: Text("おかだ"),
-                subtitle: Text("3point"),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: Text("6位"),
-                title: Text("あだち"),
-                subtitle: Text("3point"),
-              ),
-            ),
-            const SizedBox(height: 16),
-            OutlinedButton(
-              onPressed: () => {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return TopPage();
-                }))
-              },
-              child: Text("終了", style: TextStyle(fontSize: 40)),
-            ),
-          ],
+        child: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection('games/${widget.gameid}/members')
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final List<DocumentSnapshot> documents = snapshot.data!.docs;
+              return ListView(
+                children: documents.map((document) {
+                  return Card(
+                    child: ListTile(
+                      leading: Text("位"),
+                      title: Text(document['name']),
+                      subtitle: Text("points"),
+                    ),
+                  );
+                }).toList(),
+              );
+            }
+            return Center(
+              child: Text("読み込み中..."),
+            );
+          },
         ),
       ),
     );
