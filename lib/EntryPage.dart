@@ -16,11 +16,12 @@ class EntryPage extends StatefulWidget {
 
 class _EntryPageState extends State<EntryPage> {
   String infoText = "";
+  String name = "";
   @override
   Widget build(BuildContext context) {
     final UserState userState = Provider.of<UserState>(context, listen: false);
     final _codeController = TextEditingController(text: widget.codeID);
-    final _nameController = TextEditingController(text: "");
+    final _nameController = TextEditingController(text: name);
     return Scaffold(
       appBar: AppBar(
         title: Text("参加"),
@@ -58,7 +59,7 @@ class _EntryPageState extends State<EntryPage> {
                       infoText = "参加コードが無効です";
                     });
                   } else {
-                    // 参加登録 games.docID.members.userID
+                    // 参加登録
                     await store
                         .collection('games')
                         .doc(ss.id)
@@ -69,6 +70,7 @@ class _EntryPageState extends State<EntryPage> {
                       'name': _nameController.text,
                       'joined': false,
                     });
+                    name = _nameController.text;
                     // 開始ステータス待ち
                     setState(() {
                       infoText = "開始までお待ちください";
@@ -90,7 +92,7 @@ class _EntryPageState extends State<EntryPage> {
                         );
                       }
                       setState(() {
-                        infoText = "status：${data['status']}";
+                        infoText = "開始までお待ちください\nstatus：${data['status']}";
                       });
                     });
                   }
