@@ -34,7 +34,7 @@ class _ResultPageState extends State<ResultPage> {
                     child: ListTile(
                       leading: Text("位"),
                       title: Text(document['name']),
-                      subtitle: Text("points"),
+                      subtitle: Text(document['point'] + "points"),
                     ),
                   );
                 }).toList(),

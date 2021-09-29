@@ -69,6 +69,7 @@ class _EntryPageState extends State<EntryPage> {
                       'uid': user.uid,
                       'name': _nameController.text,
                       'joined': false,
+                      'point': 0,
                     });
                     name = _nameController.text;
                     // 開始ステータス待ち

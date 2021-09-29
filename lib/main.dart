@@ -1,5 +1,6 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'EntryPage.dart';
 import 'LoginPage.dart';
@@ -8,7 +9,8 @@ import 'MyPage.dart';
 import 'DetailTestPage.dart';
 import 'TopPage.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 

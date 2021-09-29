@@ -151,6 +151,29 @@ class _PresenterPageState extends State<PresenterPage> {
                               icon: Icon(Icons.share),
                               label: Text("回答表示"),
                               onPressed: () async {
+                                final querySnapshot = await FirebaseFirestore
+                                    .instance
+                                    .collection('games')
+                                    .doc(widget.gameid)
+                                    .collection('members')
+                                    .get();
+                                final queryDocSnapshot = querySnapshot.docs;
+                                for (final snapshot in queryDocSnapshot) {
+                                  final data = snapshot.data();
+                                  print(data);
+                                  final ans = data["a$current"];
+                                  if (_qAnswerController[current] == ans) {
+                                    await FirebaseFirestore.instance
+                                        .collection(
+                                            'games/${widget.gameid}/members')
+                                        .doc(data["uid"])
+                                        .update(
+                                      {
+                                        'point': data['point'] + 1,
+                                      },
+                                    );
+                                  }
+                                }
                                 await FirebaseFirestore.instance
                                     .collection('games')
                                     .doc(widget.gameid)
