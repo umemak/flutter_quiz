@@ -147,9 +147,8 @@ class _PresenterPageState extends State<PresenterPage> {
                           const SizedBox(height: 8),
                           Container(
                             width: double.infinity,
-                            child: ElevatedButton.icon(
-                              icon: Icon(Icons.share),
-                              label: Text("回答表示"),
+                            child: ElevatedButton(
+                              child: Text("回答表示"),
                               onPressed: () async {
                                 // 正解者にポイント付与
                                 final querySnapshot = await FirebaseFirestore
@@ -190,7 +189,7 @@ class _PresenterPageState extends State<PresenterPage> {
                           Container(
                             width: double.infinity,
                             child: ElevatedButton.icon(
-                              icon: Icon(Icons.share),
+                              icon: Icon(Icons.navigate_next),
                               label: Text("つぎへ"),
                               onPressed: () async {
                                 await FirebaseFirestore.instance
@@ -214,9 +213,8 @@ class _PresenterPageState extends State<PresenterPage> {
                           const SizedBox(height: 8),
                           Container(
                             width: double.infinity,
-                            child: ElevatedButton.icon(
-                              icon: Icon(Icons.share),
-                              label: Text("結果発表"),
+                            child: ElevatedButton(
+                              child: Text("結果発表"),
                               onPressed: () async {
                                 await FirebaseFirestore.instance
                                     .collection('games')

@@ -142,7 +142,7 @@ class _QuestionPageState extends State<QuestionPage> {
                               Container(
                                 width: double.infinity,
                                 child: ElevatedButton.icon(
-                                  icon: Icon(Icons.share),
+                                  icon: Icon(Icons.check),
                                   label: Text("決定"),
                                   onPressed: () async {
                                     try {

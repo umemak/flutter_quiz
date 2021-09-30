@@ -156,9 +156,8 @@ class _AnswerPageState extends State<AnswerPage> {
                               const SizedBox(height: 8),
                               Container(
                                 width: double.infinity,
-                                child: ElevatedButton.icon(
-                                  icon: Icon(Icons.share),
-                                  label: Text("OK"),
+                                child: ElevatedButton(
+                                  child: Text("OK"),
                                   onPressed: () async {
                                     // 開始ステータス待ち
                                     setState(() {
