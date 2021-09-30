@@ -1,8 +1,9 @@
+import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/ResultPage.dart';
+import 'ResultPage.dart';
 import 'QuestionPage.dart';
+import 'UserState.dart';
 
 class AnswerPage extends StatefulWidget {
   AnswerPage(this.gameid);
@@ -19,6 +20,7 @@ class _AnswerPageState extends State<AnswerPage> {
       });
   @override
   Widget build(BuildContext context) {
+    final UserState userState = Provider.of<UserState>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text('解答'),
@@ -42,6 +44,9 @@ class _AnswerPageState extends State<AnswerPage> {
             }
             Map<String, dynamic> gamedata =
                 gamess.data!.data() as Map<String, dynamic>;
+            // final answer = gamedata[
+            // "members/${userState.player!.uid}/a${gamedata['current']}"];
+            print("gamedata:$gamedata");
             return SingleChildScrollView(
               child: Column(
                 children: [

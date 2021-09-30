@@ -151,6 +151,7 @@ class _PresenterPageState extends State<PresenterPage> {
                               icon: Icon(Icons.share),
                               label: Text("回答表示"),
                               onPressed: () async {
+                                // 正解者にポイント付与
                                 final querySnapshot = await FirebaseFirestore
                                     .instance
                                     .collection('games')
@@ -174,6 +175,7 @@ class _PresenterPageState extends State<PresenterPage> {
                                     );
                                   }
                                 }
+                                // ステータス更新
                                 await FirebaseFirestore.instance
                                     .collection('games')
                                     .doc(widget.gameid)
@@ -246,16 +248,11 @@ class _PresenterPageState extends State<PresenterPage> {
                                     child: ListView(
                                       children: documents.map((document) {
                                         print("doc: " + document['name']);
-                                        return Card(
-                                          child: Text(
-                                            document['name'],
-                                          ),
+                                        return ListTile(
+                                          title: Text(document['name'] +
+                                              " : " +
+                                              document['a$current']),
                                         );
-                                        // child: ListTile(
-                                        //   title: Text(document['name'] +
-                                        //       " : " +
-                                        //       document['answer']),
-                                        // ),
                                       }).toList(),
                                     ),
                                   );
