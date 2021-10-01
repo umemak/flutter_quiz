@@ -187,7 +187,8 @@ class _AnswerPageState extends State<AnswerPage> {
                                         }));
                                       }
                                       setState(() {
-                                        infoText = "status：${data['status']}";
+                                        infoText =
+                                            "お待ちください\nstatus：${data['status']}";
                                       });
                                     });
                                   },

@@ -201,7 +201,8 @@ class _QuestionPageState extends State<QuestionPage> {
                                           }
                                         }
                                         setState(() {
-                                          infoText = "status：${data['status']}";
+                                          infoText =
+                                              "お待ちください\nstatus：${data['status']}";
                                         });
                                       });
                                     } catch (e) {
